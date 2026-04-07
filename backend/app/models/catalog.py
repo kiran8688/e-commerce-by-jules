@@ -25,6 +25,20 @@ class Category(Base):
 
 
 class Product(Base):
+    """
+    The central master record for a sellable item in the catalog.
+
+    Design Decisions:
+    - We use the `Numeric` type for all pricing. Floating-point math (`Float`/`Real`) is strictly
+      avoided in financial systems due to binary approximation errors.
+    - `slug` and `sku` are indexed since they are heavily queried (slugs for SEO-friendly URLs,
+      SKUs for inventory synchronization).
+    - `compare_at_price` allows for built-in frontend "sale" displays without complex discount logic.
+
+    Relationships:
+    - `uselist=False` on `inventory` defines a one-to-one relationship.
+    - `lazy="selectin"` is used for async compatibility.
+    """
     __tablename__ = "products"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)

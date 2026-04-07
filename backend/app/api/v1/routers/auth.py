@@ -12,6 +12,15 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 async def register(payload: UserCreate, db: AsyncSession = Depends(get_db)):
     """
     Register a new customer account.
+
+    Workflow:
+    1. Check if the user already exists to prevent duplicate account creation.
+    2. If not, delegate to `auth_service.create_user` to handle password hashing and DB insertion.
+
+    Status Codes:
+    - 201 Created: Successfully registered.
+    - 409 Conflict: Email already in use.
+    - 422 Unprocessable Entity: Pydantic validation failed (e.g., weak password, invalid email format).
     """
     existing = await authenticate_user(db, payload.email, payload.password)
     if existing:

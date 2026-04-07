@@ -34,6 +34,19 @@ class Order(Base):
 
 
 class OrderItem(Base):
+    """
+    Represents a single line item within a finalized Order.
+
+    CRITICAL DESIGN DECISION - SNAPSHOTS:
+    Notice the `_snapshot` suffix on fields like `product_name_snapshot` and `unit_price_snapshot`.
+    Orders are historical, immutable financial records. If an admin changes a product's price or
+    name tomorrow, it MUST NOT alter the history of an order placed today.
+    By copying these values at checkout time, we preserve historical accuracy.
+
+    Why `line_total` is stored instead of computed:
+    While line_total = quantity * unit_price_snapshot, caching it prevents complex aggregations
+    and rounding discrepancies across different reporting layers.
+    """
     __tablename__ = "order_items"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
