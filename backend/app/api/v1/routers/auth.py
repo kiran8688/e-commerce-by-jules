@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import get_db
 from app.schemas.auth import TokenResponse, UserCreate, UserLogin, UserOut
@@ -9,23 +9,32 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post("/register", response_model=UserOut, status_code=status.HTTP_201_CREATED)
-def register(payload: UserCreate, db: Session = Depends(get_db)):
+async def register(payload: UserCreate, db: AsyncSession = Depends(get_db)):
     """
     Register a new customer account.
+
+    Workflow:
+    1. Check if the user already exists to prevent duplicate account creation.
+    2. If not, delegate to `auth_service.create_user` to handle password hashing and DB insertion.
+
+    Status Codes:
+    - 201 Created: Successfully registered.
+    - 409 Conflict: Email already in use.
+    - 422 Unprocessable Entity: Pydantic validation failed (e.g., weak password, invalid email format).
     """
-    existing = authenticate_user(db, payload.email, payload.password)
+    existing = await authenticate_user(db, payload.email, payload.password)
     if existing:
         raise HTTPException(status_code=409, detail="User already exists")
 
-    return create_user(db, payload)
+    return await create_user(db, payload)
 
 
 @router.post("/login", response_model=TokenResponse)
-def login(payload: UserLogin, db: Session = Depends(get_db)):
+async def login(payload: UserLogin, db: AsyncSession = Depends(get_db)):
     """
     Validate credentials and mint an access token.
     """
-    user = authenticate_user(db, payload.email, payload.password)
+    user = await authenticate_user(db, payload.email, payload.password)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 

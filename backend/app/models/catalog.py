@@ -21,10 +21,24 @@ class Category(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    products = relationship("Product", back_populates="category")
+    products = relationship("Product", back_populates="category", lazy="selectin")
 
 
 class Product(Base):
+    """
+    The central master record for a sellable item in the catalog.
+
+    Design Decisions:
+    - We use the `Numeric` type for all pricing. Floating-point math (`Float`/`Real`) is strictly
+      avoided in financial systems due to binary approximation errors.
+    - `slug` and `sku` are indexed since they are heavily queried (slugs for SEO-friendly URLs,
+      SKUs for inventory synchronization).
+    - `compare_at_price` allows for built-in frontend "sale" displays without complex discount logic.
+
+    Relationships:
+    - `uselist=False` on `inventory` defines a one-to-one relationship.
+    - `lazy="selectin"` is used for async compatibility.
+    """
     __tablename__ = "products"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -44,10 +58,10 @@ class Product(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    category = relationship("Category", back_populates="products")
-    images = relationship("ProductImage", back_populates="product", cascade="all, delete-orphan")
-    inventory = relationship("Inventory", back_populates="product", uselist=False, cascade="all, delete-orphan")
-    reviews = relationship("Review", back_populates="product")
+    category = relationship("Category", back_populates="products", lazy="selectin")
+    images = relationship("ProductImage", back_populates="product", cascade="all, delete-orphan", lazy="selectin")
+    inventory = relationship("Inventory", back_populates="product", uselist=False, cascade="all, delete-orphan", lazy="selectin")
+    reviews = relationship("Review", back_populates="product", lazy="selectin")
 
 
 class ProductImage(Base):
@@ -61,7 +75,7 @@ class ProductImage(Base):
     is_primary: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
-    product = relationship("Product", back_populates="images")
+    product = relationship("Product", back_populates="images", lazy="selectin")
 
 
 class Inventory(Base):
@@ -74,4 +88,4 @@ class Inventory(Base):
     reorder_level: Mapped[int] = mapped_column(default=0, nullable=False)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
-    product = relationship("Product", back_populates="inventory")
+    product = relationship("Product", back_populates="inventory", lazy="selectin")

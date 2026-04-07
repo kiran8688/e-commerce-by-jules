@@ -26,4 +26,4 @@ class Payment(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    order = relationship("Order", back_populates="payment")
+    order = relationship("Order", back_populates="payment", lazy="selectin")

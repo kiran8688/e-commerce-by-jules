@@ -1,27 +1,27 @@
 from uuid import UUID
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.cart import Cart, CartItem
 from app.models.catalog import Product
 from app.schemas.cart import CartItemCreate
 
-def get_or_create_cart(db: Session, user_id: UUID) -> Cart:
-    cart = db.scalar(select(Cart).where(Cart.user_id == user_id))
+async def get_or_create_cart(db: AsyncSession, user_id: UUID) -> Cart:
+    cart = await db.scalar(select(Cart).where(Cart.user_id == user_id))
     if not cart:
         cart = Cart(user_id=user_id)
         db.add(cart)
-        db.commit()
-        db.refresh(cart)
+        await db.commit()
+        await db.refresh(cart)
     return cart
 
-def add_to_cart(db: Session, user_id: UUID, item: CartItemCreate) -> Cart:
-    cart = get_or_create_cart(db, user_id)
-    product = db.scalar(select(Product).where(Product.id == item.product_id))
+async def add_to_cart(db: AsyncSession, user_id: UUID, item: CartItemCreate) -> Cart:
+    cart = await get_or_create_cart(db, user_id)
+    product = await db.scalar(select(Product).where(Product.id == item.product_id))
     if not product:
         raise ValueError("Product not found")
 
-    cart_item = db.scalar(
+    cart_item = await db.scalar(
         select(CartItem).where(CartItem.cart_id == cart.id, CartItem.product_id == item.product_id)
     )
 
@@ -36,6 +36,6 @@ def add_to_cart(db: Session, user_id: UUID, item: CartItemCreate) -> Cart:
         )
         db.add(cart_item)
 
-    db.commit()
-    db.refresh(cart)
+    await db.commit()
+    await db.refresh(cart)
     return cart

@@ -17,8 +17,8 @@ class Cart(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    user = relationship("User", back_populates="cart")
-    items = relationship("CartItem", back_populates="cart", cascade="all, delete-orphan")
+    user = relationship("User", back_populates="cart", lazy="selectin")
+    items = relationship("CartItem", back_populates="cart", cascade="all, delete-orphan", lazy="selectin")
 
 
 class CartItem(Base):
@@ -31,5 +31,5 @@ class CartItem(Base):
     unit_price_snapshot: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
     added_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
-    cart = relationship("Cart", back_populates="items")
-    product = relationship("Product")
+    cart = relationship("Cart", back_populates="items", lazy="selectin")
+    product = relationship("Product", lazy="selectin")

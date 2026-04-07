@@ -22,5 +22,5 @@ class Review(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    user = relationship("User", back_populates="reviews")
-    product = relationship("Product", back_populates="reviews")
+    user = relationship("User", back_populates="reviews", lazy="selectin")
+    product = relationship("Product", back_populates="reviews", lazy="selectin")

@@ -1,12 +1,12 @@
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.user import User
 from app.schemas.auth import UserCreate
 
 
-def create_user(db: Session, payload: UserCreate) -> User:
+async def create_user(db: AsyncSession, payload: UserCreate) -> User:
     """
     Create a new user with a hashed password.
     Business rules should live here, not in the router.
@@ -18,15 +18,15 @@ def create_user(db: Session, payload: UserCreate) -> User:
         phone=payload.phone,
     )
     db.add(user)
-    db.commit()
-    db.refresh(user)
+    await db.commit()
+    await db.refresh(user)
     return user
 
 
-def authenticate_user(db: Session, email: str, password: str) -> User | None:
+async def authenticate_user(db: AsyncSession, email: str, password: str) -> User | None:
     """Verify login credentials."""
     stmt = select(User).where(User.email == email)
-    user = db.scalar(stmt)
+    user = await db.scalar(stmt)
 
     if not user:
         return None

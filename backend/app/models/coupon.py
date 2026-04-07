@@ -25,5 +25,5 @@ class OrderCoupon(Base):
     coupon_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("coupons.id"), nullable=False)
     discount_amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
 
-    order = relationship("Order")
-    coupon = relationship("Coupon")
+    order = relationship("Order", lazy="selectin")
+    coupon = relationship("Coupon", lazy="selectin")

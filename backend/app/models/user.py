@@ -8,6 +8,24 @@ from app.db.base import Base
 
 
 class User(Base):
+    """
+    Represents an application user (both customers and admins).
+
+    Design Decisions:
+    - We use UUIDs for primary keys to prevent exposing internal row counts (e.g., user #12)
+      and to allow distributed systems to generate IDs without database round-trips.
+    - Password hashes are stored instead of plain text for security.
+    - `is_admin` is a simple boolean flag. For a more complex enterprise system,
+      this would likely be replaced by an RBAC (Role-Based Access Control) join table,
+      but a boolean is sufficient and performant for this e-commerce spec.
+
+    Relationships:
+    - lazy="selectin": This is strictly required for async SQLAlchemy compatibility.
+      It ensures that when a `User` is queried, the related data is loaded via a secondary
+      SELECT statement immediately, preventing implicit synchronous queries (which crash async).
+    - cascade="all, delete-orphan": Ensures that if a User is deleted, all their addresses
+      and their cart are also wiped from the DB to prevent orphaned records.
+    """
     __tablename__ = "users"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -24,10 +42,10 @@ class User(Base):
         onupdate=func.now(),
     )
 
-    addresses = relationship("Address", back_populates="user", cascade="all, delete-orphan")
-    orders = relationship("Order", back_populates="user")
-    reviews = relationship("Review", back_populates="user")
-    cart = relationship("Cart", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    addresses = relationship("Address", back_populates="user", cascade="all, delete-orphan", lazy="selectin")
+    orders = relationship("Order", back_populates="user", lazy="selectin")
+    reviews = relationship("Review", back_populates="user", lazy="selectin")
+    cart = relationship("Cart", back_populates="user", uselist=False, cascade="all, delete-orphan", lazy="selectin")
 
 
 class Address(Base):
@@ -51,4 +69,4 @@ class Address(Base):
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    user = relationship("User", back_populates="addresses")
+    user = relationship("User", back_populates="addresses", lazy="selectin")
