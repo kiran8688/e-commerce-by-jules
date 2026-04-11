@@ -10,20 +10,51 @@ Use this server to expose safe, bounded tools that help with:
 Keep business mutation tools narrow and authenticated.
 """
 
+import asyncio
 from mcp.server.fastmcp import FastMCP
+from sqlalchemy import select, func
+from app.db.session import AsyncSessionLocal
+from app.models.catalog import Product, Category, Inventory
 
 mcp = FastMCP("ecommerce-mcp")
 
 
 @mcp.tool()
-def summarize_catalog_health() -> str:
+async def summarize_catalog_health() -> str:
     """
     Return a textual summary of the current catalog state.
 
-    In a real implementation, this tool would query the database and return
-    counts for products, categories, low-stock items, and inactive products.
+    Queries the database to return counts for products, categories,
+    and identify low-stock items.
     """
-    return "Catalog health summary placeholder"
+    async with AsyncSessionLocal() as session:
+        # Count total products
+        product_count_stmt = select(func.count()).select_from(Product)
+        product_count = (await session.execute(product_count_stmt)).scalar() or 0
+
+        # Count active products
+        active_product_stmt = select(func.count()).select_from(Product).where(Product.is_active == True)
+        active_count = (await session.execute(active_product_stmt)).scalar() or 0
+
+        # Count total categories
+        category_count_stmt = select(func.count()).select_from(Category)
+        category_count = (await session.execute(category_count_stmt)).scalar() or 0
+
+        # Identify low stock items (quantity <= reorder_level)
+        low_stock_stmt = (
+            select(func.count())
+            .select_from(Inventory)
+            .where(Inventory.quantity_on_hand <= Inventory.reorder_level)
+        )
+        low_stock_count = (await session.execute(low_stock_stmt)).scalar() or 0
+
+    return (
+        f"Catalog Health Summary:\n"
+        f"- Total Products: {product_count}\n"
+        f"- Active Products: {active_count}\n"
+        f"- Total Categories: {category_count}\n"
+        f"- Low Stock Items: {low_stock_count}"
+    )
 
 
 @mcp.tool()
@@ -31,7 +62,14 @@ def draft_product_copy(name: str, features: list[str]) -> str:
     """
     Produce structured product-copy assistance for admin use.
     """
-    return f"Draft copy for {name}: " + ", ".join(features)
+    feature_list = "\n".join([f"- {f}" for f in features])
+    return (
+        f"Draft copy for {name}:\n\n"
+        f"Experience the ultimate in quality with our new {name}. "
+        f"Designed for those who value both style and substance.\n\n"
+        f"Key Features:\n{feature_list}\n\n"
+        f"Order yours today and elevate your lifestyle!"
+    )
 
 
 if __name__ == "__main__":
