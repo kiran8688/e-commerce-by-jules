@@ -1,3 +1,4 @@
+from app.models.payment import Payment
 import uuid
 from datetime import datetime
 
