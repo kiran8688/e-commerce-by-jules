@@ -35,7 +35,7 @@ export function Catalog() {
             name={p.name}
             price={`$${p.price.toFixed(2)}`}
             imageUrl="/placeholder.svg"
-            onAddToCart={() => console.log("Add to cart", p.id)}
+            onAddToCart={() => {}}
           />
         ))}
       </div>
