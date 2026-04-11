@@ -27,3 +27,7 @@ class UserOut(BaseModel):
     phone: str | None
     is_active: bool
     is_admin: bool
+
+
+class TokenPayload(BaseModel):
+    sub: str | None = None
