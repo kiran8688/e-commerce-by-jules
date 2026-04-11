@@ -1,3 +1,4 @@
+from app.models.review import Review
 import uuid
 from datetime import datetime
 
