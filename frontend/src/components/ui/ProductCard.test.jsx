@@ -32,6 +32,6 @@ describe('ProductCard', () => {
 
   it('displays the correct button text', () => {
     render(<ProductCard {...mockProduct} />);
-    expect(screen.getByText('Add to cart')).toBeInTheDocument();
+    expect(screen.getByText('Add to Cart')).toBeInTheDocument();
   });
 });
