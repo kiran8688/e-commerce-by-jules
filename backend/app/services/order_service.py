@@ -1,10 +1,11 @@
 import uuid
+from datetime import datetime
 from uuid import UUID
 
 from app.models.cart import Cart
 from app.models.order import Order, OrderItem
 from app.schemas.order import OrderCreate
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 
@@ -38,10 +39,15 @@ async def create_order_from_cart(db: AsyncSession, user_id: UUID, order_in: Orde
     # Always calculate totals on the server to prevent payload tampering.
     subtotal = sum(item.unit_price_snapshot * item.quantity for item in cart.items)
 
-    # Generate a pseudo-random order number. In a real system, this might be a monotonic sequence
-    # or follow a specific business format (e.g., ORD-2026-XXXXX).
+    # Generate a monotonic order number in a business format: ORD-YYYY-XXXXX
+    # We use a database sequence to ensure uniqueness and monotonicity.
+    seq_result = await db.execute(text("SELECT nextval('order_number_seq')"))
+    seq_value = seq_result.scalar()
+    current_year = datetime.now().year
+    order_number = f"ORD-{current_year}-{seq_value:05d}"
+
     order = Order(
-        order_number=str(uuid.uuid4()).split("-")[0].upper(),
+        order_number=order_number,
         user_id=user_id,
         shipping_address_id=order_in.shipping_address_id,
         billing_address_id=order_in.billing_address_id,
