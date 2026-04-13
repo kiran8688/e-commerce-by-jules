@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from uuid import UUID
 
-from app.models.cart import Cart
+from app.models.cart import Cart, CartItem
 from app.models.order import Order, OrderItem
 from app.schemas.order import OrderCreate
 from sqlalchemy import select, text
@@ -75,8 +75,7 @@ async def create_order_from_cart(db: AsyncSession, user_id: UUID, order_in: Orde
     db.add_all(order_items)
 
     # Clear cart
-    for item in cart.items:
-        await db.delete(item)
+    await db.execute(delete(CartItem).where(CartItem.cart_id == cart.id))
 
     await db.commit()
     await db.refresh(order)
