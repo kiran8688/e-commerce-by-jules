@@ -2,11 +2,10 @@ import uuid
 from datetime import datetime
 from typing import Any
 
+from app.db.base import Base
 from sqlalchemy import DateTime, ForeignKey, Numeric, String, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from app.db.base import Base
 
 
 class Payment(Base):

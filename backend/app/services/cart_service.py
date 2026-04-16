@@ -1,10 +1,11 @@
 from uuid import UUID
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.cart import Cart, CartItem
 from app.models.catalog import Product
 from app.schemas.cart import CartItemCreate
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 
 async def get_or_create_cart(db: AsyncSession, user_id: UUID) -> Cart:
     cart = await db.scalar(select(Cart).where(Cart.user_id == user_id))

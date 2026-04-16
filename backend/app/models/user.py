@@ -1,11 +1,9 @@
-from app.models.review import Review
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, String, func, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-
 from app.db.base import Base
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, func
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class User(Base):

@@ -1,9 +1,10 @@
 from uuid import UUID
+
+from app.models.catalog import Category, Product
+from app.schemas.catalog import ProductCreate
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.catalog import Product, Category
-from app.schemas.catalog import ProductCreate
 
 async def get_product(db: AsyncSession, product_id: UUID) -> Product | None:
     return await db.scalar(select(Product).where(Product.id == product_id))

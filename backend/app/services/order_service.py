@@ -1,11 +1,10 @@
-import uuid
 from datetime import datetime
 from uuid import UUID
 
 from app.models.cart import Cart, CartItem
 from app.models.order import Order, OrderItem
 from app.schemas.order import OrderCreate
-from sqlalchemy import select, text
+from sqlalchemy import delete, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

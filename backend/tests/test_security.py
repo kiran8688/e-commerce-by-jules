@@ -1,8 +1,9 @@
 import pytest
-from httpx import AsyncClient, ASGITransport
-from app.main import app
 from app.api.v1.deps import get_current_active_admin
+from app.main import app
 from app.models.user import User
+from httpx import ASGITransport, AsyncClient
+
 
 @pytest.mark.asyncio
 async def test_admin_dashboard_no_token():

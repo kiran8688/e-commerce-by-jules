@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
 from app.db.session import get_db
-from app.schemas.cart import CartOut, CartItemCreate
-from app.services.cart_service import get_or_create_cart, add_to_cart
+from app.schemas.cart import CartItemCreate, CartOut
+from app.services.cart_service import add_to_cart, get_or_create_cart
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(prefix="/carts", tags=["Cart"])
 
