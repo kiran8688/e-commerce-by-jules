@@ -1,11 +1,9 @@
-from app.models.payment import Payment
 import uuid
 from datetime import datetime
 
+from app.db.base import Base
 from sqlalchemy import DateTime, ForeignKey, Integer, Numeric, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from app.db.base import Base
 
 
 class Order(Base):

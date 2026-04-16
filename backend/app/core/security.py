@@ -1,10 +1,9 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import jwt
-from pwdlib import PasswordHash
-
 from app.core.config import settings
+from pwdlib import PasswordHash
 
 # Argon2 is the recommended modern password hashing approach in pwdlib guidance.
 password_hasher = PasswordHash.recommended()
@@ -29,7 +28,7 @@ def create_access_token(subject: str, expires_minutes: int | None = None, extra:
     - exp: expiry timestamp
     """
     expire_delta = timedelta(minutes=expires_minutes or settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    expire = datetime.now(timezone.utc) + expire_delta
+    expire = datetime.now(UTC) + expire_delta
 
     payload: dict[str, Any] = {"sub": subject, "exp": expire}
     if extra:

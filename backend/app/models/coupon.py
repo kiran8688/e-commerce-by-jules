@@ -1,8 +1,10 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import Boolean, DateTime, Numeric, String, ForeignKey, Integer, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from app.db.base import Base
+from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, Numeric, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 
 class Coupon(Base):
     __tablename__ = "coupons"

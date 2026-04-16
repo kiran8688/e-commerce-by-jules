@@ -10,11 +10,10 @@ Use this server to expose safe, bounded tools that help with:
 Keep business mutation tools narrow and authenticated.
 """
 
-import asyncio
-from mcp.server.fastmcp import FastMCP
-from sqlalchemy import select, func
 from app.db.session import AsyncSessionLocal
-from app.models.catalog import Product, Category, Inventory
+from app.models.catalog import Category, Inventory, Product
+from mcp.server.fastmcp import FastMCP
+from sqlalchemy import func, select
 
 mcp = FastMCP("ecommerce-mcp")
 

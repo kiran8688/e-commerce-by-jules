@@ -1,6 +1,5 @@
-from fastapi import APIRouter, Depends
-
 from app.api.v1.deps import get_current_active_admin
+from fastapi import APIRouter, Depends
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 

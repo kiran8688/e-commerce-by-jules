@@ -17,9 +17,9 @@ async def test_cors_preflight_restricted():
         }
         response = await ac.options("/api/v1/products/", headers=headers)
 
-    # FastAPI CORSMiddleware returns 200 even if method is not allowed,
+    # FastAPI CORSMiddleware returns 400 for bad preflight requests (invalid method),
     # but it won't include it in the Access-Control-Allow-Methods header if it's not whitelisted.
-    assert response.status_code == 200
+    assert response.status_code == 400
     allowed_methods = response.headers.get("Access-Control-Allow-Methods", "")
     assert "TRACE" not in allowed_methods
 

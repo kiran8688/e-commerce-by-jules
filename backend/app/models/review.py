@@ -1,10 +1,9 @@
 import uuid
 from datetime import datetime
 
+from app.db.base import Base
 from sqlalchemy import Boolean, DateTime, ForeignKey, SmallInteger, String, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from app.db.base import Base
 
 
 class Review(Base):

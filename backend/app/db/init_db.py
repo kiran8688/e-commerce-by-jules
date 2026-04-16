@@ -3,22 +3,19 @@ import logging
 import random
 import uuid
 
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-
-from app.core.config import settings
-from app.core.security import hash_password
-from app.db.session import AsyncSessionLocal, engine
-from app.db.base import Base
+import app.models.cart
+import app.models.catalog
+import app.models.coupon
+import app.models.order
+import app.models.payment
+import app.models.review
 
 # Import all models so Base.metadata can create tables
 import app.models.user
-import app.models.catalog
-import app.models.cart
-import app.models.order
-import app.models.coupon
-import app.models.payment
-import app.models.review
+from app.core.security import hash_password
+from app.db.base import Base
+from app.db.session import AsyncSessionLocal, engine
+from sqlalchemy import select
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

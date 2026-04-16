@@ -1,10 +1,9 @@
+import asyncio
 from logging.config import fileConfig
 
-import asyncio
-from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy import pool
-
 from alembic import context
+from sqlalchemy import pool
+from sqlalchemy.ext.asyncio import create_async_engine
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -18,14 +17,6 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 from app.db.base import Base
-import app.models.user
-import app.models.catalog
-import app.models.cart
-import app.models.order
-import app.models.payment
-import app.models.review
-import app.models.coupon
-import app.models.auth
 
 target_metadata = Base.metadata
 

@@ -1,12 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 from uuid import UUID
 
 from app.db.session import get_db
+from app.models.order import Order
 from app.schemas.order import OrderCreate, OrderOut
 from app.services.order_service import create_order_from_cart
-from app.models.order import Order
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
 
