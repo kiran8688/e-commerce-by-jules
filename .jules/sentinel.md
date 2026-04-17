@@ -1,0 +1,4 @@
+## 2026-04-17 - [Fix Password Oracle Vulnerability in Registration]
+**Vulnerability:** The registration endpoint (`/api/v1/auth/register`) checked for existing users using `authenticate_user`. If a user attempted to register with an existing email but an *incorrect* password, `authenticate_user` returned `None`, bypassing the 409 Conflict check. This would cause the endpoint to attempt inserting the user, resulting in a 500 Server Error due to a database unique constraint violation. However, if the user guessed the *correct* password, it returned a 409 Conflict. This allowed an attacker to determine if a guessed password was correct based on whether they received a 500 or 409 error.
+**Learning:** Checking for user existence using authentication functions introduces side-channel vulnerabilities (a password oracle).
+**Prevention:** Always verify user existence using functions that only query the identifier (e.g., `get_user_by_email`) and do not validate credentials.
