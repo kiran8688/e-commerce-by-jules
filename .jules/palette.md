@@ -1,0 +1,3 @@
+## 2025-02-23 - [Icon-Only Navigation Buttons Accessibility]
+**Learning:** While `aria-label` is crucial for screen readers, sighted users relying on mice also need context for icon-only buttons. The lack of visible labels or focus states makes navigation confusing and difficult to use via keyboard. Additionally, mobile toggle buttons must communicate their state via `aria-expanded` and dynamic `aria-label`.
+**Action:** Always pair `aria-label` with `title` attributes on icon-only buttons to provide native tooltips, and consistently apply `focus-visible` states to all interactive elements to support keyboard navigation.
