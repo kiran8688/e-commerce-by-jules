@@ -1,0 +1,3 @@
+## 2024-04-20 - Prevent eager loading of unused relationships on product list
+**Learning:** Using `lazy="selectin"` on SQLAlchemy models causes severe over-fetching on list endpoints (like `/products/`) when the response schema (`ProductOut`) doesn't include those relationships. It triggers multiple unnecessary `IN` queries for categories, images, inventory, and reviews, which are immediately discarded.
+**Action:** Use `.options(noload(...))` in the service layer queries to override default eager loading for relationships that are not exposed in the API response schema, saving database round-trips and memory.
