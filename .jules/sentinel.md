@@ -1,0 +1,4 @@
+## 2025-02-14 - [Password Oracle Vulnerability]
+**Vulnerability:** Registration endpoint was using `authenticate_user` to check if a user existed. This required supplying the correct password for existing accounts, effectively blocking registration *only* if the password matched, but allowing registration (which then failed uniquely) or leaking whether the account existed without blocking the request if a wrong password was given, creating a password oracle.
+**Learning:** Never use a login verification function (`authenticate_user`) merely to check for the existence of an entity (`user`), as this conflates two distinct concerns and can leak whether authentication attempts fail due to an incorrect user or incorrect password.
+**Prevention:** Use a dedicated existence-check query (`get_user_by_email`) during registration and other non-authentication operations.
