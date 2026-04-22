@@ -1,0 +1,4 @@
+## 2025-04-22 - [Fix Registration Password Oracle]
+**Vulnerability:** The registration endpoint used `authenticate_user` to check if a user already existed. This created a password oracle vulnerability (timing attack), as it only detected a duplicate if the provided password happened to match the existing user's password. It also caused a bug where a user could register multiple times with the same email if they provided different passwords.
+**Learning:** Using authentication methods for existence checks is inherently insecure and can lead to timing attacks or logic bypasses.
+**Prevention:** Use a dedicated lookup function (like `get_user_by_email`) that only checks the identifier (email) and does not perform any cryptographic operations or password verification.
