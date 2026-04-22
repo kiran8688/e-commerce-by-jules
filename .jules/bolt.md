@@ -1,0 +1,3 @@
+## 2024-06-25 - Avoid N+1 Overhead with lazy="selectin" by using noload
+**Learning:** In SQLAlchemy models with relationships defaulting to `lazy="selectin"`, fetching a list of models without explicitly disabling the load will cause extra queries to be issued for each relationship, even if the result is serialized into a Pydantic schema that does not include those fields.
+**Action:** When creating endpoints that list models and return simplified response schemas (like `ProductOut` which omits the nested `category`, `images`, `inventory`, `reviews`), explicitly append `.options(noload(Model.relationship))` to the query to avoid eager loading relationships that are unnecessary for the response.
