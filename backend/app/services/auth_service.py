@@ -6,6 +6,12 @@ from app.models.user import User
 from app.schemas.auth import UserCreate
 
 
+async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
+    """Fetch a user by email without verifying the password."""
+    stmt = select(User).where(User.email == email)
+    return await db.scalar(stmt)
+
+
 async def create_user(db: AsyncSession, payload: UserCreate) -> User:
     """
     Create a new user with a hashed password.
