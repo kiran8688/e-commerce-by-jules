@@ -1,0 +1,3 @@
+## 2024-04-24 - [Over-Fetching with lazy="selectin" in list endpoints]
+**Learning:** By default, SQLAlchemy relationships configured with `lazy="selectin"` are eagerly loaded. In list endpoints (like `get_products`), this triggers multiple extra queries to fetch related data (categories, images, inventory, reviews) even though the basic Pydantic response schema (`ProductOut`) does not include or need them. This causes significant over-fetching and N+1 query patterns.
+**Action:** Always use `.options(noload(Model.relationship))` in list queries when the eager-loaded relationship data is not required by the response schema to prevent unnecessary queries and improve performance.
