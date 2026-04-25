@@ -1,0 +1,3 @@
+## 2026-04-25 - Native Tooltips and Dynamic Toggles for Icon Buttons
+**Learning:** For icon-only interactive elements like top navigation buttons (Search, Account, Cart) and mobile menu toggles, relying solely on `aria-label` is insufficient for sighted users who need context without a screen reader.
+**Action:** Always pair `aria-label` with a native `title` attribute for icon-only buttons to support both screen readers and sighted users. Furthermore, ensure stateful toggles (like mobile menus) dynamically update `aria-expanded`, `aria-label`, and `title` to accurately reflect their current state (e.g., "Open Menu" vs. "Close Menu").
