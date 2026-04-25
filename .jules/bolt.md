@@ -1,0 +1,3 @@
+## 2026-04-25 - Prevent N+1 queries by lazy loading unneeded relationships
+**Learning:** Using lazy="selectin" eager-loads related models on single row lookups nicely, but for collection lookups where those relationships aren't part of the response schema (like a catalog listing returning only `ProductOut` schemas), it introduces severe performance penalties by pointlessly fetching potentially vast amounts of related data (like all reviews for all products in the list).
+**Action:** When querying collections (e.g. `get_products`, `get_categories`) where related models are not returned in the API payload, explicitly set `.options(noload(...))` in the SQLAlchemy query builder to avoid over-fetching.
