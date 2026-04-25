@@ -1,0 +1,4 @@
+## 2025-04-25 - [Password Oracle Vulnerability]
+**Vulnerability:** The registration endpoint was using `authenticate_user` to check if an email existed. Because `authenticate_user` checks the password hash, an attacker could supply an existing email with a dummy password. If the email existed, the server would perform an expensive Argon2 hash comparison on the dummy password. If it didn't exist, it would return early. This timing difference allows attackers to enumerate existing emails (a password oracle).
+**Learning:** Checking for user existence using a function that also validates passwords creates a timing attack vulnerability.
+**Prevention:** Always use a dedicated function that only checks for the existence of the user record (like `get_user_by_email`) when checking if a username/email is taken, without touching the password validation logic.
