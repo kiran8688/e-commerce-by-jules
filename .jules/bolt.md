@@ -1,0 +1,3 @@
+## 2026-04-26 - Prevent Over-fetching in SQLAlchemy List Queries
+**Learning:** In SQLAlchemy models, relationships are frequently defined with `lazy="selectin"` for seamless async eager loading on individual records. However, when querying large lists of records, this causes multiple unnecessary additional queries (over-fetching) to load relationships that might not even be included in the serialized output schemas (e.g. `ProductOut`).
+**Action:** When querying lists with SQLAlchemy, use `.options(noload("*"))` (or explicit `noload` on specific relationships) to prevent eager loading of relationships that are not included in the response schema to avoid over-fetching and extra database queries.
