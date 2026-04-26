@@ -1,0 +1,3 @@
+## 2026-04-26 - Native Tooltips and Dynamic Toggle ARIA Attributes
+**Learning:** Icon-only buttons often rely solely on `aria-label` for screen readers, leaving sighted users (especially those less familiar with iconography) without context. Additionally, menu toggles often have static labels and missing `aria-expanded` states.
+**Action:** Always pair `aria-label` with a matching `title` attribute for icon-only buttons to provide native, accessible tooltips for all users. For toggle buttons, dynamically update `aria-expanded` and the `aria-label`/`title` based on the component's state to provide clear context of what the interaction will do.
