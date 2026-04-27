@@ -1,0 +1,3 @@
+## 2025-04-27 - [Avoid Eager Loading Overhead in List Endpoints]
+**Learning:** Models like `Product` use `lazy="selectin"` for their relationships (`category`, `images`, `inventory`, `reviews`), which automatically triggers additional queries when a `Product` is loaded. This is useful for single-item fetches, but when querying a large list of products for an endpoint (e.g. `get_products`) that doesn't include these relationships in its response schema (`ProductOut`), the extra queries cause significant N+1-like overhead and unnecessary database load.
+**Action:** Always use `.options(noload(...))` when querying lists of entities where the related objects are not required by the API response schema to prevent over-fetching.
