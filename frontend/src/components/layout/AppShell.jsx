@@ -38,21 +38,24 @@ export function AppShell({ children }) {
           <div className="hidden md:flex items-center gap-6">
             <button
               aria-label="Search"
-              className="text-[#595c5e] hover:text-[#0050d4] transition-colors"
+              title="Search"
+              className="text-[#595c5e] hover:text-[#0050d4] transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               <Search className="w-5 h-5" />
             </button>
             <Link
               to="/account"
               aria-label="Account"
-              className="text-[#595c5e] hover:text-[#0050d4] transition-colors"
+              title="Account"
+              className="text-[#595c5e] hover:text-[#0050d4] transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               <User className="w-5 h-5" />
             </Link>
             <Link
               to="/cart"
               aria-label="Cart"
-              className="relative text-[#595c5e] hover:text-[#0050d4] transition-colors"
+              title="Cart"
+              className="relative text-[#595c5e] hover:text-[#0050d4] transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               <ShoppingCart className="w-5 h-5" />
               {/* Optional Cart Badge */}
@@ -62,9 +65,11 @@ export function AppShell({ children }) {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-[#2c2f31]"
+            className="md:hidden text-[#2c2f31] rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            title={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
