@@ -1,9 +1,8 @@
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.user import User
 from app.schemas.auth import UserCreate
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def create_user(db: AsyncSession, payload: UserCreate) -> User:
@@ -23,6 +22,12 @@ async def create_user(db: AsyncSession, payload: UserCreate) -> User:
     return user
 
 
+async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
+    """Securely retrieve a user by email to verify existence without a password oracle."""
+    stmt = select(User).where(User.email == email)
+    return await db.scalar(stmt)
+
+
 async def authenticate_user(db: AsyncSession, email: str, password: str) -> User | None:
     """Verify login credentials."""
     stmt = select(User).where(User.email == email)
@@ -39,4 +44,6 @@ async def authenticate_user(db: AsyncSession, email: str, password: str) -> User
 
 def issue_token_for_user(user: User) -> str:
     """Return JWT access token for a user."""
-    return create_access_token(subject=str(user.id), extra={"email": user.email, "admin": user.is_admin})
+    return create_access_token(
+        subject=str(user.id), extra={"email": user.email, "admin": user.is_admin}
+    )
