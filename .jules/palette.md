@@ -1,0 +1,3 @@
+## 2024-05-01 - Pair ARIA Labels with Native Tooltips for Icon-Only Buttons
+**Learning:** Icon-only buttons with just an `aria-label` are accessible to screen readers, but sighted users (or those using keyboard navigation) lack a text equivalent when hovering or focusing. The mobile menu toggle also needs dynamic `aria-expanded` and `aria-label` states to accurately convey state changes to assistive technologies.
+**Action:** Always pair `aria-label` with a matching `title` attribute on icon-only buttons to provide a native tooltip for sighted/mouse users. Add focus indicators (`focus-visible:ring-2`) and dynamically update ARIA attributes for toggle states.
