@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import get_db
 from app.schemas.auth import TokenResponse, UserCreate, UserLogin, UserOut
-from app.services.auth_service import authenticate_user, create_user, issue_token_for_user
+from app.services.auth_service import authenticate_user, create_user, get_user_by_email, issue_token_for_user
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -22,7 +22,9 @@ async def register(payload: UserCreate, db: AsyncSession = Depends(get_db)):
     - 409 Conflict: Email already in use.
     - 422 Unprocessable Entity: Pydantic validation failed (e.g., weak password, invalid email format).
     """
-    existing = await authenticate_user(db, payload.email, payload.password)
+    # Fix: Prevent password oracle vulnerability by only checking user existence
+    # by email instead of validating the password during registration.
+    existing = await get_user_by_email(db, payload.email)
     if existing:
         raise HTTPException(status_code=409, detail="User already exists")
 
