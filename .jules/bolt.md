@@ -1,0 +1,3 @@
+## 2024-05-01 - Avoid over-fetching with SQLAlchemy eager loading
+**Learning:** In this codebase, the catalog models (`Product`, `Category`) define relationships with `lazy="selectin"`. When querying lists of objects using `.scalars(select(...))` (e.g., `get_products` and `get_categories`), these relationships are eagerly loaded automatically. This results in significant over-fetching and many additional DB queries, especially when the returned schemas (like `ProductOut`) don't actually need or include these related objects.
+**Action:** When writing list queries in SQLAlchemy where related data is not needed by the Pydantic response schema, always use `.options(noload(...))` to explicitly prevent the default `selectin` eager loading.
