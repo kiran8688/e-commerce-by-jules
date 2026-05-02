@@ -1,0 +1,3 @@
+## 2024-05-02 - Overfetching from lazy="selectin" on List Queries
+**Learning:** The SQLAlchemy models `Product` and `Category` default to `lazy="selectin"` for relationships. On list queries (like `get_products` and `get_categories`), this causes N+1 like overfetching of relationships (e.g. `images`, `inventory`, `category`) that aren't even used in the list response schemas (`ProductOut`, `CategoryOut`).
+**Action:** Use `.options(noload(Model.relationship))` in list queries to prevent eager loading of relationships that are excluded from the respective Pydantic response schema, avoiding significant unnecessary database load.
