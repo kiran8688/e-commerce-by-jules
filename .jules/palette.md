@@ -1,0 +1,3 @@
+## 2025-02-19 - [Accessibility for Icon-only Buttons]
+**Learning:** Icon-only buttons and links must pair `aria-label` with `title` attributes (native tooltips) to ensure they are fully accessible. They also need dynamic updates for interactive elements like toggles (e.g., updating `aria-expanded` and `aria-label`).
+**Action:** When creating or updating icon-only buttons (such as in navigation headers), always include both an `aria-label` and a matching `title` attribute, and dynamically manage their state properties (`aria-expanded`, dynamic text) to support both screen readers and sighted users relying on tooltips.
