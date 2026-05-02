@@ -1,0 +1,4 @@
+## 2025-05-02 - [Password Oracle in Registration]
+**Vulnerability:** The `/auth/register` endpoint used `authenticate_user(email, password)` to check if a user existed before creating a new account. This created a password oracle: if an attacker tried to register with an existing email, it would only return a "409 Conflict" if they guessed the exact password. Otherwise, it would proceed to attempt DB insertion and crash with a 500 Internal Server Error (Integrity constraint). Additionally, computing the password hash just to check existence creates a timing attack vector.
+**Learning:** Never use authentication functions (which validate passwords) for simple existence checks.
+**Prevention:** Created and used `get_user_by_email` which only queries by email, explicitly avoiding password validation during registration existence checks.
