@@ -1,0 +1,5 @@
+
+## 2024-05-03 - [Password Oracle Vulnerability]
+**Vulnerability:** The registration endpoint used `authenticate_user` to check if a user existed. This checks both email and password, creating a password oracle vulnerability where an attacker could deduce if an email is registered by the response time difference or by attempting registration. If an attacker guessed the correct password during registration, they would be told the user exists, but if they guessed incorrectly, the system would attempt to re-register the existing user and fail uniquely.
+**Learning:** Using an authentication function to simply check for user existence exposes sensitive logic. Authentication functions perform time-consuming operations (password hashing/verification) which introduces side-channel vulnerabilities (timing attacks).
+**Prevention:** Always use a dedicated function (e.g., `get_user_by_email`) that only queries the database for existence without verifying credentials when you just need to know if an entity exists.
