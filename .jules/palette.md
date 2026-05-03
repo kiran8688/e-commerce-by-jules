@@ -1,0 +1,3 @@
+## 2024-05-03 - [Icon-Only Button Accessibility in AppShell]
+**Learning:** Found that while icon-only buttons like Search, Cart, Account, and Mobile Menu in `AppShell.jsx` used `aria-label`, they were missing native tooltips (`title`) and dynamic state attributes (`aria-expanded`, dynamic `aria-label` for toggle states).
+**Action:** Pair `aria-label` with `title` attributes (native tooltips) for icon-only buttons to support both screen readers and sighted users. Ensure dynamic elements like menu toggles update `aria-expanded` and `aria-label` based on their state to convey accurate information to assistive technologies.
