@@ -1,0 +1,3 @@
+## 2024-05-18 - [Preventing Over-Fetching with SQLAlchemy List Queries]
+**Learning:** Models with `lazy="selectin"` relationship configurations default to executing behind-the-scenes secondary queries for eager loading on every fetch. While useful for single items, this causes N+1/over-fetching bottlenecks when querying lists of items and the response schema (like Pydantic Out schemas) does not require or output those related fields.
+**Action:** When creating or optimizing list/collection endpoints in SQLAlchemy (like `get_products` or `get_categories`), always inspect the corresponding Pydantic response schema. For any relationships not present in the output, append `.options(noload(Model.relationship))` to the select query to prevent unnecessary queries.
