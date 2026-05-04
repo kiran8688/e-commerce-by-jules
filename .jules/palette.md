@@ -1,0 +1,3 @@
+## 2026-05-04 - [AppShell Header Accessibility]
+**Learning:** For accessibility, icon-only buttons must pair `aria-label` with `title` attributes (native tooltips) to support both screen readers and sighted users. Furthermore, dynamic state buttons like a mobile menu toggle must programmatically update their `aria-expanded` and `aria-label` based on their toggle states.
+**Action:** Always ensure that icon-only interactive elements contain both `aria-label` and `title`, and that components managing state like "open/closed" properly reflect that state back to the DOM via ARIA attributes. Also ensure that visible focus rings (e.g. `focus-visible:ring-2`) are consistently applied for keyboard navigators.
