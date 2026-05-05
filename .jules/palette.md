@@ -1,0 +1,3 @@
+## 2025-05-05 - [Add title attributes and togglable ARIA labels for icon-only buttons in AppShell]
+**Learning:** Icon-only buttons with just an `aria-label` might be accessible to screen readers, but sighted users miss out on context since `aria-label` doesn't create a native tooltip. Additionally, toggle buttons like the mobile menu must dynamically update `aria-label` and `title` to reflect the action and specify state via `aria-expanded` to give screen reader users context.
+**Action:** Pair `aria-label` with `title` attributes on all icon-only buttons going forward, and dynamically update `aria-expanded` and `aria-label` for any toggle states.

@@ -38,6 +38,7 @@ export function AppShell({ children }) {
           <div className="hidden md:flex items-center gap-6">
             <button
               aria-label="Search"
+              title="Search"
               className="text-[#595c5e] hover:text-[#0050d4] transition-colors"
             >
               <Search className="w-5 h-5" />
@@ -45,6 +46,7 @@ export function AppShell({ children }) {
             <Link
               to="/account"
               aria-label="Account"
+              title="Account"
               className="text-[#595c5e] hover:text-[#0050d4] transition-colors"
             >
               <User className="w-5 h-5" />
@@ -52,6 +54,7 @@ export function AppShell({ children }) {
             <Link
               to="/cart"
               aria-label="Cart"
+              title="Cart"
               className="relative text-[#595c5e] hover:text-[#0050d4] transition-colors"
             >
               <ShoppingCart className="w-5 h-5" />
@@ -64,7 +67,9 @@ export function AppShell({ children }) {
           <button
             className="md:hidden text-[#2c2f31]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
+            aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
+            title={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
