@@ -1,0 +1,4 @@
+## 2024-05-05 - [Password Oracle in Registration]
+**Vulnerability:** The registration endpoint was using `authenticate_user(email, password)` to check if a user existed. Because this function hashes the provided password to check against the database when the user exists (and immediately returns `None` if they don't), it created a noticeable timing difference. An attacker could measure the response time of the `/register` endpoint to determine if an email address exists in the database.
+**Learning:** Using authentication methods for existence checks is an anti-pattern. Although `authenticate_user` seems convenient, it performs expensive cryptographic operations (password hashing) that vary in duration based on whether a user record is found.
+**Prevention:** Always use a dedicated function like `get_user_by_email` that only performs a simple database lookup without any expensive operations for checking existence.
