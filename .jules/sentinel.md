@@ -1,0 +1,4 @@
+## 2025-02-18 - [Authentication Bypass via Password Oracle]
+**Vulnerability:** The `/register` endpoint used `authenticate_user` to check if a user existed by attempting to verify the provided password against the existing user's hash. If a user existed but the provided password was incorrect, it did not raise a 409 Conflict, essentially ignoring the duplicate email and creating a new user (or failing unexpectedly). Conversely, if it returned a 409, it leaked that the provided password was correct for that user, acting as a password oracle.
+**Learning:** Using an authentication function (`authenticate_user`) to verify user existence is fundamentally flawed because it requires the password to match to return the user, creating a password oracle vulnerability or hiding duplicate users.
+**Prevention:** Always use a dedicated function like `get_user_by_email` that only checks for existence based on the identifier (email) without validating credentials.
