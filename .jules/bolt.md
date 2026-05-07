@@ -1,0 +1,3 @@
+## 2024-05-07 - [Prevent Eager Loading N+1 Queries in Catalog List Endpoints]
+**Learning:** Default `lazy="selectin"` on SQLAlchemy models causes N+1 (or at least multiple separate database queries per item/relationship) when returning lists of items like `Product` or `Category` if those relationships aren't needed by the API response schema.
+**Action:** Use `.options(raiseload('*'))` in SQLAlchemy `select` queries for list endpoints (like `get_products` and `get_categories`) where related entities are not returned. This safely aborts any accidental relationship access and completely avoids unnecessary query generation.
