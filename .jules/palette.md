@@ -1,0 +1,3 @@
+## 2024-05-08 - Icon Button Accessibility
+**Learning:** Icon-only buttons require both `aria-label` (for screen readers) and `title` (for sighted users hovering). Interactive elements with states (like mobile menus) must dynamically update `aria-expanded` and their `aria-label` to accurately reflect their current state to assistive technologies. Keyboard focus visibility (`focus-visible`) is also critical for these elements since they often lack inherent visual boundaries.
+**Action:** Always pair `aria-label` with `title` for icon-only buttons, use dynamic ARIA attributes for stateful controls, and ensure a visible focus ring using `focus-visible`.
