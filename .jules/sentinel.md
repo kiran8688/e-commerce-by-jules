@@ -1,0 +1,4 @@
+## 2025-02-14 - [Password Oracle Vulnerability in Registration]
+**Vulnerability:** The `/register` endpoint used `authenticate_user(db, payload.email, payload.password)` to check if a user already existed. This acts as a password oracle because it unnecessarily tests the provided password against the hash of an existing user's password, which leaks whether the user exists based on timing or success.
+**Learning:** Functions that perform cryptographic operations like password hashing/verification should only be used for login/authentication, not for checking user existence. Doing so introduces potential timing attacks or authentication bypass opportunities.
+**Prevention:** Always use a simple lookup function like `get_user_by_email` that only checks for the existence of the email address without verifying the password when checking if an account exists during registration.
