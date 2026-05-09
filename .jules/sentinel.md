@@ -1,0 +1,4 @@
+## 2024-05-24 - [Avoid password oracle via timing attack]
+**Vulnerability:** The authentication check for checking if a user already exists during registration calls `authenticate_user`. This hashes the given password during the check, resulting in a timing attack vulnerability that allows an attacker to know if a given email address corresponds to an existing account.
+**Learning:** During account registration, an existence check must run fast regardless of whether the account exists or not, so we must separate account existence query from credential verification query.
+**Prevention:** Always verify account existence without verifying cryptographic components (e.g. password). Do this by using a separate function that only queries by email, leaving password verification for the actual login handler.
