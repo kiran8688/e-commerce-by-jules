@@ -1,0 +1,4 @@
+## 2025-02-27 - [Fix Password Oracle Timing Attack in Registration]
+**Vulnerability:** The `/auth/register` endpoint used `authenticate_user` to check if a user already existed. Because `authenticate_user` calls `verify_password` (which performs a computationally expensive hash verification) only if the user exists, an attacker could observe the response time to determine if an email address is registered in the system (a timing attack/password oracle).
+**Learning:** Checking for user existence using an authentication function that performs cryptographic operations leaks existence via timing attacks. Authentication functions must strictly be used for login validation.
+**Prevention:** Always use a simple database query like `get_user_by_email` to securely check for user existence without performing cryptographic operations that would cause varying response times.
