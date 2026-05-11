@@ -1,0 +1,3 @@
+## 2024-05-11 - [SQLAlchemy Async Eager Loading]
+**Learning:** In asynchronous SQLAlchemy (`AsyncSession`), synchronous lazy-loading is not possible and raises `MissingGreenletError`. To prevent unnecessary data fetching from relationships configured with eager loading (e.g., `lazy='selectin'`), explicitly use `.options(raiseload('*'))` when the relationships are not needed by the output schema.
+**Action:** Always apply `raiseload('*')` in async queries for list endpoints where nested relationships are not part of the response schema, disabling the default eager loads to save database overhead.
