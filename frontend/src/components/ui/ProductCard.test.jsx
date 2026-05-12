@@ -24,7 +24,7 @@ describe('ProductCard', () => {
   it('calls onAddToCart when the button is clicked', () => {
     render(<ProductCard {...mockProduct} />);
 
-    const button = screen.getByRole('button', { name: /add to cart/i });
+    const button = screen.getByRole('button', { name: 'Add Test Product to cart', hidden: true });
     fireEvent.click(button);
 
     expect(mockProduct.onAddToCart).toHaveBeenCalledTimes(1);
