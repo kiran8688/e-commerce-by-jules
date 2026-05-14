@@ -1,0 +1,3 @@
+## 2025-02-18 - [Dynamic ARIA Attributes and Native Tooltips on Icon Buttons]
+**Learning:** Sighted users often lack context for icon-only buttons when only `aria-label` is present. Pairing `aria-label` with the `title` attribute provides native, accessible tooltips for all users. For toggle components (like a mobile menu), `aria-label` and `title` must be dynamically updated to reflect the action that will occur ("Open Menu" vs "Close Menu"), and `aria-expanded` must be properly maintained.
+**Action:** Always pair `title` with `aria-label` for icon-only buttons. Always ensure dynamic accessibility states (`aria-expanded` and variable labels) are tied directly to the React state that controls the toggle visibility.
