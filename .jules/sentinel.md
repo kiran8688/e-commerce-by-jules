@@ -1,0 +1,4 @@
+## 2025-05-14 - Timing Attack in Registration Endpoint
+**Vulnerability:** The registration endpoint (`/api/v1/auth/register`) used `authenticate_user` to check if a user already existed. Because `authenticate_user` hashes the provided password before failing if the user doesn't exist, it allows an attacker to distinguish between a non-existent email and an existing email with an incorrect password via timing attacks.
+**Learning:** Functions that perform computationally expensive operations (like password hashing) should never be used just to check for the existence of a resource if it can leak information about that resource to unauthenticated users.
+**Prevention:** Use a simple query like `get_user_by_email` to check for existence before taking action that does not require verifying credentials.
