@@ -1,0 +1,3 @@
+## 2026-05-16 - [Focus States & Dynamic Aria Labels on Navigation Elements]
+**Learning:** Icon-only buttons and links within navigation components (like AppShell) often lack visible focus indicators and hover context for sighted keyboard users. Mobile toggle buttons also frequently lack dynamic `aria-expanded` and contextual `aria-label`s based on their toggle state.
+**Action:** Consistently apply `focus-visible` styles (e.g., `focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm`) across all interactive navigation elements, add native `title` tooltips to icon-only buttons, and ensure stateful toggle buttons dynamically update their accessibility attributes.
