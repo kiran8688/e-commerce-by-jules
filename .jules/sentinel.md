@@ -1,0 +1,4 @@
+## 2024-05-16 - Prevent User Enumeration Timing Attack in Registration
+**Vulnerability:** The registration endpoint (`/auth/register`) used `authenticate_user` to check if a user already existed. This function performs expensive cryptographic password hashing when a user is found, making the endpoint vulnerable to user enumeration via a timing attack (the response takes longer if the user exists). Furthermore, it could result in a 500 error if `authenticate_user` tries to match the new password with the existing hash and they don't match or the DB expects only the email check.
+**Learning:** Checking for user existence should never involve validating a password, as cryptographic operations leak information via timing differences.
+**Prevention:** Always use a simple database lookup by email (e.g., `get_user_by_email`) instead of full authentication functions when verifying if an account exists during registration.
