@@ -1,0 +1,3 @@
+## 2024-05-17 - AppShell Navigation Icon Accessibility
+**Learning:** Icon-only interactive elements need robust accessibility support beyond just `aria-label`. We should combine `aria-label` with `title` to support both screen readers and sighted users (as native tooltips). Toggle buttons (like mobile menus) must dynamically update `aria-expanded` and `aria-label` based on state. Focus rings must also be visible for keyboard users.
+**Action:** When adding icon-only buttons or links, always pair `aria-label` with a matching `title`. For stateful toggles, always include an `aria-expanded` attribute. Include `focus-visible` ring utility classes (e.g., `focus-visible:ring-2 focus-visible:ring-[#0050d4]`) to ensure keyboard navigability.
