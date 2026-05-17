@@ -1,0 +1,3 @@
+## 2024-05-17 - Prevent Silent Eager Loading with `lazy="selectin"`
+**Learning:** The database models in this architecture heavily rely on `lazy="selectin"` for asynchronous compatibility (e.g., `Product` loading `category`, `images`, `inventory`, `reviews`). This defaults to eager loading, causing significant performance bottlenecks by executing multiple additional queries per entity fetched, even when the output schema (e.g., `ProductOut`) does not use those nested relationships.
+**Action:** Always append `.options(raiseload('*'))` to SQLAlchemy read queries in the service layer when eager relationships are not needed by the Pydantic response schemas. This explicitly prevents unnecessary data fetching and safeguards against silent performance regressions.
