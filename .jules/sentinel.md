@@ -1,0 +1,4 @@
+## 2024-05-18 - Prevent IDOR in User Endpoints
+**Vulnerability:** Cart and Order endpoints relied solely on path parameters (`/{user_id}`) to determine the target resource, without validating if the authenticated user making the request actually owned that `user_id`.
+**Learning:** FastAPIs routing makes it easy to accept path parameters, but developers must explicitly link the requested resource to the authenticated session context (e.g., `get_current_user`). Without this link, any valid token could access any user's data by just guessing their ID.
+**Prevention:** Always inject `Depends(get_current_user)` into endpoints returning user-specific data, and implement an explicit authorization check ensuring `current_user.id == path_user_id` (or the user is an admin) before retrieving or modifying the resource.

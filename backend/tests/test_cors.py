@@ -17,14 +17,9 @@ async def test_cors_preflight_restricted():
         }
         response = await ac.options("/api/v1/products/", headers=headers)
 
-    # FastAPI CORSMiddleware returns 200 even if method is not allowed,
-    # but it won't include it in the Access-Control-Allow-Methods header if it's not whitelisted.
-    assert response.status_code == 200
-    allowed_methods = response.headers.get("Access-Control-Allow-Methods", "")
-    assert "TRACE" not in allowed_methods
-
-    allowed_headers = response.headers.get("Access-Control-Allow-Headers", "")
-    assert "X-Vulnerable-Header" not in allowed_headers
+    # In newer versions of FastAPI/Starlette, CORSMiddleware returns 400 Bad Request
+    # for disallowed CORS preflight (OPTIONS) requests.
+    assert response.status_code == 400
 
 
 @pytest.mark.asyncio
