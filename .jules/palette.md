@@ -1,0 +1,3 @@
+## 2024-05-18 - Improve icon-only button accessibility
+**Learning:** For accessibility, icon-only buttons must pair `aria-label` with `title` attributes (native tooltips) to support both screen readers and sighted users. For toggle buttons (like mobile menus), dynamically updating `aria-expanded` and `aria-label` based on state provides crucial context. Additionally, adding `focus-visible` styles ensures visible focus rings for keyboard navigation.
+**Action:** Always include both `aria-label` and `title` for icon-only interactive elements. Use dynamic aria attributes for toggle states and ensure `focus-visible` classes are applied for clear keyboard accessibility.
