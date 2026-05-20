@@ -1,0 +1,3 @@
+## 2026-05-20 - Redundant Mobile Menu Toggle aria attributes
+**Learning:** Adding both `aria-label` mapped to the expanded state and the `aria-expanded` attribute directly to the mobile menu toggle button is slightly redundant. Screen readers naturally announce the expanded/collapsed state because of the `aria-expanded` attribute. Using a static `aria-label` combined with `aria-expanded` is preferred to minimize redundancy while retaining accessibility.
+**Action:** Default to using a static `aria-label` (e.g., "Main Menu") alongside `aria-expanded` to convey state for toggle buttons, rather than dynamically updating the `aria-label` to duplicate the state information.
