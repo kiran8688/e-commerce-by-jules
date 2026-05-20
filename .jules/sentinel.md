@@ -1,0 +1,4 @@
+## 2024-05-20 - [Fix password oracle vulnerability in user registration]
+**Vulnerability:** The registration endpoint used `authenticate_user` to check for existing users. Because `authenticate_user` also verifies passwords (which involves hashing, an expensive operation), this leaked information about user existence via timing differences. If the email exists, the server takes longer to respond (due to password verification) compared to when the email does not exist. Also `authenticate_user` returns `None` if passwords don't match, bypassing the duplicate email check and causing a 500 error when the DB constraint fails.
+**Learning:** Using an authentication function for simple existence checks can introduce timing-based password oracle vulnerabilities and logic bugs.
+**Prevention:** Always use dedicated existence check functions (like `get_user_by_email`) instead of full authentication flows when verifying if an identifier is already in use.
