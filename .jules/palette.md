@@ -1,0 +1,3 @@
+## 2024-05-21 - Accessible Icon-Only Toggles and Links
+**Learning:** Icon-only controls (like mobile menu toggles or navigation links) require native `title` attributes matching `aria-label`s to support both screen readers and sighted users. Toggles must dynamically update their `aria-label`/`title` and maintain `aria-expanded` state. Additionally, `focus-visible` classes are necessary to ensure keyboard users have clear visual focus rings aligned with branding.
+**Action:** Always pair `aria-label` with `title` for icon-only buttons/links, dynamically update ARIA attributes for toggles, and add explicit `focus-visible` styling (e.g., `focus-visible:ring-2 focus-visible:ring-[#0050d4]`) to interactive elements.
