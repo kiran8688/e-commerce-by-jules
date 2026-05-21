@@ -1,0 +1,3 @@
+## 2025-02-28 - [SQLAlchemy Eager Loading Bottleneck]
+**Learning:** The `Product` model configures multiple relationships (`category`, `images`, `inventory`, `reviews`) with `lazy="selectin"`. Because the `read_products` endpoint only returns the base `ProductOut` schema (which omits these fields), default eager loading triggers multiple unnecessary JOINs and queries. In async contexts, synchronous lazy-loading is impossible, so explicit control is vital.
+**Action:** When querying models with eagerly loaded relationships that are not required by the API schema, use `.options(raiseload("*"))` in the query to prevent unnecessary eager loads. Ensure this is passed cleanly as a parameter to generic service-layer functions.
