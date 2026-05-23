@@ -1,0 +1,4 @@
+## 2024-05-23 - [Timing Attack in Registration]
+**Vulnerability:** The registration endpoint used `authenticate_user` to check if an email already existed, which performs an expensive Argon2 password hash computation if the email is found. This allows an attacker to enumerate registered emails via timing attacks (requests for existing emails take significantly longer than non-existent ones) and crashes the server with an `IntegrityError` if the password doesn't match the existing user's password.
+**Learning:** Cryptographic functions like password hashing should only be used when authenticating, never for checking the existence of a user.
+**Prevention:** Always use a dedicated, lightweight lookup function (e.g., `get_user_by_email`) when checking for user existence to prevent timing side channels and avoid unnecessary computational overhead.
