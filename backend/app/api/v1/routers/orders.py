@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 from uuid import UUID
 
 from app.db.session import get_db
+from app.models.order import Order
 from app.schemas.order import OrderCreate, OrderOut
 from app.services.order_service import create_order_from_cart
-from app.models.order import Order
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import raiseload
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
 
@@ -19,5 +20,17 @@ async def create_order(user_id: UUID, order_in: OrderCreate, db: AsyncSession = 
 
 @router.get("/{user_id}", response_model=list[OrderOut])
 async def list_orders(user_id: UUID, db: AsyncSession = Depends(get_db)):
-    result = await db.scalars(select(Order).where(Order.user_id == user_id))
+    """
+    Retrieve a list of orders for a user.
+
+    ⚡ Bolt Performance Optimization:
+    We apply `raiseload('user')` and `raiseload('payment')` because the `OrderOut` schema
+    does not need to eagerly load the related `User` or `Payment` models.
+    It only needs `items`. This avoids redundant queries for data we drop.
+    """
+    stmt = select(Order).where(Order.user_id == user_id).options(
+        raiseload(Order.user),
+        raiseload(Order.payment)
+    )
+    result = await db.scalars(stmt)
     return list(result)
