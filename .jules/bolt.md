@@ -1,0 +1,3 @@
+## 2026-05-24 - Prevent Pydantic Schema Over-Fetching
+**Learning:** Pydantic schemas lacking relationship fields (like `ProductOut` omitting `category`, `images`, etc.) can cause wasted N+1 style eager loads if the underlying SQLAlchemy model defines those relationships as `lazy="selectin"`.
+**Action:** Always inspect the required fields in the response schema and pass `raiseload('*')` (via `load_options` parameter) from the router level to generic service methods like `get_products` when relationship data isn't needed. This safely prevents unnecessary database queries without breaking other callers.
