@@ -1,0 +1,3 @@
+## 2024-05-25 - AppShell Icon Accessibility
+**Learning:** Icon-only controls in the global navigation bar (Search, Account, Cart, Mobile Menu) lacked native tooltips (`title` attributes), explicit keyboard focus indicators (`focus-visible` styles), and state-aware properties (`aria-expanded`). This causes issues for screen readers tracking component state and sighted users who rely on tooltips for icon meaning or clear visual focus when navigating via keyboard.
+**Action:** Always complement `aria-label`s on icon-only interactive elements with `title` attributes for tooltips, explicitly define `focus-visible:ring-2` to support keyboard navigation, and dynamically manage `aria-expanded` and labels on toggle buttons (e.g., 'Open Menu' vs 'Close Menu').
