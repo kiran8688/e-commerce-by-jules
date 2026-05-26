@@ -1,0 +1,4 @@
+## 2024-05-24 - [User Registration existence check used authentication flow]
+**Vulnerability:** The `/register` endpoint used `authenticate_user` to check if a user already existed instead of doing a simple email lookup.
+**Learning:** Using `authenticate_user` for an existence check exposes a password oracle vulnerability because `verify_password` takes a noticeable amount of time, revealing through timing attacks whether the email exists. Furthermore, if a user tries to register with an existing email but the *wrong* password for that existing email, `authenticate_user` returns `None` (because the passwords don't match), bypassing the 409 Conflict check and crashing the DB on insertion due to a unique constraint violation on `User.email`.
+**Prevention:** Always use a simple, fast database lookup like `get_user_by_email` when verifying user existence, both to avoid logic bugs and to prevent timing attacks.

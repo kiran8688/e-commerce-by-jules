@@ -1,9 +1,14 @@
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.user import User
 from app.schemas.auth import UserCreate
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+
+async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
+    """Securely fetch user by email without cryptographic operations."""
+    stmt = select(User).where(User.email == email)
+    return await db.scalar(stmt)
 
 
 async def create_user(db: AsyncSession, payload: UserCreate) -> User:
