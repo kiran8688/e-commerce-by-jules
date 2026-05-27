@@ -1,0 +1,3 @@
+## 2026-05-27 - [Optimization] Prevent Wasteful Async Selectin Loading using raiseload('*')
+**Learning:** In asynchronous SQLAlchemy (`AsyncSession`), synchronous lazy-loading is not possible. Relationships configured with eager loading (like `lazy='selectin'`) will automatically be fetched. When Pydantic response schemas (like `ProductOut`) omit these relationship fields, the application performs wasteful N+1 or unnecessary eager loads in the background that are never serialized.
+**Action:** When returning schemas that don't need relationship data, explicitly use `.options(raiseload('*'))` in the router endpoint (passed to generic service-layer functions via `load_options`) to safely block and prevent unnecessary eager relationship loads.
