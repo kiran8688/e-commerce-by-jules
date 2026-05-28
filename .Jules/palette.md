@@ -1,0 +1,3 @@
+## 2024-05-18 - Tooltips and dynamic a11y for toggles
+**Learning:** Icon-only controls (such as navigation links or mobile menu toggles) must include native `title` attributes that mirror their `aria-label`s to provide tooltips for sighted users. Additionally, toggle buttons must dynamically update their `aria-label` and `title` attributes and maintain an accurate `aria-expanded` state. Keyboard navigation is greatly improved when adding focus-visible classes on interactive elements.
+**Action:** Always pair `title` with `aria-label` on icon-only links/buttons. Always ensure toggles like mobile menus dynamically update their a11y attributes and `aria-expanded` state based on whether they are open or closed.
