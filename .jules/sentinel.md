@@ -1,0 +1,4 @@
+## 2024-05-15 - Password Oracle Timing Attack in Registration
+**Vulnerability:** The registration endpoint was using `authenticate_user` to check if a user already existed. Because `authenticate_user` performs a cryptographic password verification hash if the user is found, an attacker could observe the timing difference between responses for existing vs. non-existing emails, allowing them to enumerate registered users (password oracle).
+**Learning:** Using authentication methods that include costly cryptographic hashing for simple existence checks leaks information via timing attacks.
+**Prevention:** Always use a simple database lookup (like `get_user_by_email`) without password verification when purely checking for user existence. `authenticate_user` must be reserved strictly for login validation.
