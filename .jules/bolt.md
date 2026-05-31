@@ -1,0 +1,3 @@
+## 2024-05-31 - Preventing Unnecessary Eager Loads in Async SQLAlchemy
+**Learning:** Default `lazy="selectin"` eager loading on SQLAlchemy relationships causes wasted queries when endpoints return Pydantic schemas that omit those fields. While `noload('*')` is often suggested to strip unused eager loads, `raiseload('*')` is explicitly preferred in this codebase as it safely prevents both unnecessary eager loads and accidental synchronous lazy loading attempts.
+**Action:** When returning Pydantic schemas that do not include relationship fields, pass `load_options=[raiseload('*')]` from the router to the service layer to prevent wasted database queries.
