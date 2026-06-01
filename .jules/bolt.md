@@ -1,0 +1,3 @@
+## 2026-06-01 - Avoid N+1 and unnecessary eager loads with raiseload
+**Learning:** When using async SQLAlchemy (`AsyncSession`), relationships with `lazy='selectin'` fetch their associated data concurrently using separate queries. When a Pydantic response schema (like `ProductOut`) does not need these relationships, the eager load is completely wasted, causing invisible overhead and potential N+1 query patterns.
+**Action:** Use `.options(raiseload('*'))` in generic service queries when fetching collections for list endpoints where relationship data isn't needed, but pass it dynamically via `load_options` from the router to avoid breaking other callers.
