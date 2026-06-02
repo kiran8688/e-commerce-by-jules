@@ -1,0 +1,4 @@
+## 2024-05-24 - Registration Password Oracle Vulnerability
+**Vulnerability:** The registration endpoint used `authenticate_user` to check if a user existed. This caused a password oracle/timing attack vulnerability, as `authenticate_user` returns early without hashing if the user is not found, and it also caused a database constraint error if the user existed but a different password was provided.
+**Learning:** Never use authentication functions (which verify passwords) to check user existence. This leaks user existence via timing and logic flaws.
+**Prevention:** Always use a simple lookup function like `get_user_by_email` to check user existence securely and reliably.
