@@ -1,0 +1,3 @@
+## 2024-06-03 - Async SQLAlchemy lazy="selectin" N+1 Anti-Pattern
+**Learning:** The codebase relies on `lazy="selectin"` for async SQLAlchemy compatibility, but this creates a performance anti-pattern. Eager loads are executed for all relationships (like product images, inventory, reviews) even when Pydantic response schemas omit them, causing wasted database queries and memory usage.
+**Action:** When returning response schemas that omit relationships, pass `raiseload('*')` from the router to the generic service functions via a `load_options` parameter to prevent unnecessary eager loads while preserving flexibility for other callers.
