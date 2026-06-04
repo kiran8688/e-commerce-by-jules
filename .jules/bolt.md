@@ -1,0 +1,3 @@
+## 2025-02-14 - Preventing N+1 queries from global lazy="selectin"
+**Learning:** In SQLAlchemy, relationships configured globally with `lazy="selectin"` on the model will eagerly load on every query, even if the resulting Pydantic schema (like `ProductOut`) does not include those fields, causing invisible overhead and unnecessary database load.
+**Action:** Always apply explicit `.options(raiseload('*'))` at the router level when querying lists of items where relationship data is excluded by the response schema.
