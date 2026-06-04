@@ -1,0 +1,3 @@
+## 2024-05-18 - AppShell Icon Accessibility
+**Learning:** Icon-only controls (like navigation links or mobile menu toggles) need both `aria-label` for screen readers and `title` for sighted users to provide tooltips. Additionally, interactive elements require visible focus rings using `focus-visible` classes (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4]`), and toggle buttons must dynamically update `aria-expanded`, `aria-label`, and `title` states.
+**Action:** Ensure all icon-only buttons/links include mirroring `title` and `aria-label` attributes, implement visible focus rings, and correctly manage `aria-expanded` and dynamic labels on toggles.
