@@ -1,0 +1,3 @@
+## 2024-06-07 - Initial Setup
+**Learning:** Found an accessibility issue pattern with the AppShell's icon-only controls. The `title` attribute should be added to match the `aria-label` for tooltip support. `aria-expanded` and correct dynamic aria-labels should be implemented for toggles like the mobile menu. Focus visible styles also need attention for keyboard navigation.
+**Action:** Always verify icon-only buttons have native `title` attributes matching their `aria-label`. For stateful toggles, always provide dynamic `aria-label` and `title` attributes that reflect the current state, and include the `aria-expanded` attribute. Ensure custom focus styles (`focus-visible:ring-2`) are applied.
