@@ -1,0 +1,3 @@
+## 2024-06-07 - Prevent Wasted Eager Loads in Pydantic Schemas
+**Learning:** When SQLAlchemy models use `lazy="selectin"` for relationships, querying them will automatically perform additional queries to load those relationships. If the Pydantic response schema (like `ProductOut`) does not include these relationship fields, this causes a wasted N+1 query problem, fetching data that gets discarded.
+**Action:** Pass `raiseload('*')` as a load option from the router endpoint into the generic service-layer query function when returning response schemas that omit relationship fields, preventing unnecessary eager loading without breaking other callers.
