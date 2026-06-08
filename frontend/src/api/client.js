@@ -13,10 +13,13 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000
  *    header in this one file, rather than across 50 different React components.
  */
 export async function apiFetch(path, init = {}) {
+  const token = localStorage.getItem("token");
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
     headers: {
       "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...(init.headers ?? {}),
     },
   });
