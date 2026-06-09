@@ -1,0 +1,3 @@
+## 2024-06-09 - Preventing Wasted Eager Loads with raiseload
+**Learning:** When using `lazy='selectin'` on SQLAlchemy models for async compatibility, eager loading occurs automatically even if the Pydantic response schema (like `ProductOut`) completely omits those relationship fields. This causes unnecessary, wasted N+1 database queries.
+**Action:** Always prevent these wasted eager loads by passing load options like `raiseload('*')` from the router endpoint into generic service-layer functions. Doing this from the router prevents inadvertently breaking other callers that might actually rely on the relationship data.
