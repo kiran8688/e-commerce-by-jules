@@ -1,0 +1,3 @@
+## 2023-10-27 - [AppShell Icon Accessibility]
+**Learning:** Icon-only controls (such as navigation links or mobile menu toggles) must include native `title` attributes that mirror their `aria-label`s to provide tooltips for sighted users. Additionally, toggle buttons must dynamically update their `aria-label` and `title` attributes and maintain an accurate `aria-expanded` state.
+**Action:** Always include both `aria-label` and `title` attributes for icon-only buttons. For interactive elements that toggle state, ensure `aria-expanded` is maintained and labels reflect the current state. Use `focus-visible` to clearly indicate keyboard focus.
