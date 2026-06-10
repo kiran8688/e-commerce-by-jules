@@ -1,0 +1,3 @@
+## 2024-06-10 - Prevent wasted N+1 eager loads with Pydantic schemas
+**Learning:** When SQLAlchemy models are configured with `lazy="selectin"` for async compatibility, they automatically eager load relationships. If the Pydantic response schema (like `ProductOut`) omits these relationship fields, those eager loads become wasted N+1 queries that degrade performance unnecessarily.
+**Action:** Pass load options like `raiseload('*')` from the FastAPI router down to the service layer when fetching data for endpoints where relationships aren't needed. Use a `load_options` argument in the generic service functions so it doesn't break other callers that might rely on the relationships.
