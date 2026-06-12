@@ -1,0 +1,3 @@
+## 2024-05-24 - [Backend Optimization] Wasted Eager Loading on Schema Exclusions
+**Learning:** Returning Pydantic schemas (like `ProductOut`) that omit relationship fields does not automatically prevent the underlying SQLAlchemy model from executing wasted +N eager loads when configured with `lazy='selectin'`.
+**Action:** Always explicitly use `raiseload('*')` at the query or router level when fetching data for schemas that do not require relationship data to avoid unnecessary database queries.
