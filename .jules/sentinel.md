@@ -1,0 +1,4 @@
+## 2025-02-26 - IDOR in User-Specific Endpoints
+**Vulnerability:** The `/carts/{user_id}` and `/orders/{user_id}` endpoints lacked authentication and authorization, allowing any user (or unauthenticated visitor) to access and modify carts or orders for any `user_id` by guessing or knowing the UUID (Insecure Direct Object Reference).
+**Learning:** Even though UUIDs provide some defense against enumeration, they are not a replacement for proper access control. Endpoints that act on behalf of a specific user must explicitly verify that the caller is authenticated and matches the requested `user_id` (or is an admin).
+**Prevention:** Always use `Depends(get_current_user)` on sensitive endpoints and assert authorization by verifying the authenticated user owns the resource (e.g., `user_id == current_user.id`) or checking for admin privileges.
