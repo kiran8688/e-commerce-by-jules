@@ -1,0 +1,3 @@
+## 2025-01-20 - Ensure Keyboard Navigation Accessibility in Global Header
+**Learning:** The global navigation elements lacked visible focus states for keyboard users. Relying on default browser outlines can lead to inconsistent or invisible focus rings, making keyboard navigation difficult or impossible for users with motor disabilities.
+**Action:** Always use explicit `focus-visible` utility classes (`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color] rounded-sm`) on interactive elements (Links, buttons) to guarantee high-contrast, accessible, and on-brand keyboard focus indicators.
