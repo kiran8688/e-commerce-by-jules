@@ -1,0 +1,4 @@
+## 2025-01-31 - Fix 500 Error in Registration Endpoint
+**Vulnerability:** The `/auth/register` endpoint relied on `authenticate_user` to check for duplicate emails. `authenticate_user` returns `None` if the password doesn't match, allowing an attacker to bypass the existing user check and trigger a 500 Internal Server Error (Database UNIQUE constraint violation) by registering an existing email with a different password.
+**Learning:** Authentication checks (`authenticate_user`) should never be overloaded to check for resource existence. They are designed to fail on ANY invalid credential, masking the reason for security. Resource existence checks must use dedicated, independent queries (e.g., `get_user_by_email`).
+**Prevention:** Always use a dedicated function to check for the existence of an entity when enforcing uniqueness constraints, rather than reusing authentication logic.
