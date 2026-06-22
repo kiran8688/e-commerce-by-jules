@@ -17,6 +17,7 @@ export async function apiFetch(path, init = {}) {
     ...init,
     headers: {
       "Content-Type": "application/json",
+      ...(localStorage.getItem("token") ? { Authorization: `Bearer ${localStorage.getItem("token")}` } : {}),
       ...(init.headers ?? {}),
     },
   });
