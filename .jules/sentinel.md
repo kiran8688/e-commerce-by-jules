@@ -1,0 +1,4 @@
+## 2025-06-23 - Fix User Registration Authentication Check Bypass
+**Vulnerability:** The `/register` endpoint used `authenticate_user` (which verifies both email and password) instead of checking only if an email exists. If a user tries to register an email that already exists but provides a *different* password than the existing user, `authenticate_user` would return `None`. The code would then incorrectly assume the email is available and attempt to create a duplicate user, leading to a database error due to the `UNIQUE` constraint on the email column.
+**Learning:** `authenticate_user` should be used exclusively for logging users in. For validating uniqueness or resource existence, always use a targeted DB query like `get_user_by_email`.
+**Prevention:** Avoid overloading credential validation functions. Always fetch resources directly by identifying keys (like email) when validating uniqueness.
