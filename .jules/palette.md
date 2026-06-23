@@ -1,0 +1,3 @@
+## 2024-05-20 - Auth Form Accessibility
+**Learning:** Forms lacking `htmlFor` on labels, `id` on inputs, and using `type="button"` for submission break screen reader associations and prevent users from submitting via the 'Enter' key. Missing `autoComplete` attributes also prevent password managers from working smoothly.
+**Action:** Always pair `<label>` with `htmlFor` and `<input>` with matching `id`, use `type="submit"` for primary form actions, and include semantic `autoComplete` attributes.
