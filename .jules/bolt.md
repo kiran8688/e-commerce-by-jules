@@ -1,0 +1,3 @@
+## 2024-06-24 - Prevent Wasted Eager Loading on List Endpoints
+**Learning:** When returning Pydantic response schemas (like `ProductOut`) that omit relationship fields configured with `lazy='selectin'` in SQLAlchemy models, the relationships still eagerly load by default, causing wasted N+1 DB queries. `raiseload('*')` prevents lazy loading but does not override explicit mapper-level eager loading like `selectin`.
+**Action:** Always explicitly pass `noload('*')` to the underlying SQLAlchemy query via `.options()` for list endpoints where relationship data is not required by the response schema.
