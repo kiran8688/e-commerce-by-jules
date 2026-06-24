@@ -7,6 +7,12 @@ export function AppShell({ children }) {
 
   return (
     <div className="min-h-screen bg-[#f5f7f9] text-[#2c2f31] font-['Inter',sans-serif]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-[#ffffff] focus:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-br-md shadow-md"
+      >
+        Skip to content
+      </a>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#f5f7f9]/80 backdrop-blur-xl border-b border-[#eef1f3]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:py-5">
@@ -114,7 +120,7 @@ export function AppShell({ children }) {
       </header>
 
       {/* Main Content Area */}
-      <main className="mx-auto max-w-7xl px-6 py-8 md:py-12 lg:py-16">
+      <main id="main-content" className="mx-auto max-w-7xl px-6 py-8 md:py-12 lg:py-16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4]" tabIndex={-1}>
         {children}
       </main>
 
