@@ -4,6 +4,7 @@ from sqlalchemy import DateTime, ForeignKey, Text, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 
+
 class RefreshToken(Base):
     __tablename__ = "refresh_tokens"
 

@@ -8,9 +8,11 @@ from app.services.cart_service import get_or_create_cart, add_to_cart
 
 router = APIRouter(prefix="/carts", tags=["Cart"])
 
+
 @router.get("/{user_id}", response_model=CartOut)
 async def read_cart(user_id: UUID, db: AsyncSession = Depends(get_db)):
     return await get_or_create_cart(db, user_id)
+
 
 @router.post("/{user_id}/items", response_model=CartOut)
 async def add_item_to_cart(user_id: UUID, item: CartItemCreate, db: AsyncSession = Depends(get_db)):

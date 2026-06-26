@@ -12,9 +12,7 @@ from app.db.session import get_db
 from app.models.user import User
 from app.schemas.auth import TokenPayload
 
-reusable_oauth2 = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.API_V1_PREFIX}/auth/login"
-)
+reusable_oauth2 = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_PREFIX}/auth/login")
 
 
 async def get_current_user(

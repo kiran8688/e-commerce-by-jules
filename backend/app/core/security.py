@@ -20,7 +20,9 @@ def verify_password(password: str, hashed_password: str) -> bool:
     return password_hasher.verify(password, hashed_password)
 
 
-def create_access_token(subject: str, expires_minutes: int | None = None, extra: dict[str, Any] | None = None) -> str:
+def create_access_token(
+    subject: str, expires_minutes: int | None = None, extra: dict[str, Any] | None = None
+) -> str:
     """
     Create a signed JWT access token.
 

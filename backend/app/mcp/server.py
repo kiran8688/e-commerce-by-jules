@@ -33,7 +33,9 @@ async def summarize_catalog_health() -> str:
         product_count = (await session.execute(product_count_stmt)).scalar() or 0
 
         # Count active products
-        active_product_stmt = select(func.count()).select_from(Product).where(Product.is_active == True)
+        active_product_stmt = (
+            select(func.count()).select_from(Product).where(Product.is_active == True)
+        )
         active_count = (await session.execute(active_product_stmt)).scalar() or 0
 
         # Count total categories

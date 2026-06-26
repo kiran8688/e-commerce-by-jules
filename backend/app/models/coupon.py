@@ -4,6 +4,7 @@ from sqlalchemy import Boolean, DateTime, Numeric, String, ForeignKey, Integer, 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 
+
 class Coupon(Base):
     __tablename__ = "coupons"
 
@@ -17,6 +18,7 @@ class Coupon(Base):
     starts_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     ends_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+
 
 class OrderCoupon(Base):
     __tablename__ = "order_coupons"

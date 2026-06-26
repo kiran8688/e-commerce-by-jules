@@ -14,8 +14,12 @@ class Order(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     order_number: Mapped[str] = mapped_column(String(40), unique=True, nullable=False)
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), nullable=False)
-    shipping_address_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("addresses.id"), nullable=False)
-    billing_address_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("addresses.id"), nullable=True)
+    shipping_address_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("addresses.id"), nullable=False
+    )
+    billing_address_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("addresses.id"), nullable=True
+    )
     status: Mapped[str] = mapped_column(String(30), nullable=False)
     payment_status: Mapped[str] = mapped_column(String(30), nullable=False)
     subtotal_amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
@@ -30,7 +34,9 @@ class Order(Base):
     )
 
     user = relationship("User", back_populates="orders", lazy="selectin")
-    items = relationship("OrderItem", back_populates="order", cascade="all, delete-orphan", lazy="selectin")
+    items = relationship(
+        "OrderItem", back_populates="order", cascade="all, delete-orphan", lazy="selectin"
+    )
     payment = relationship("Payment", back_populates="order", uselist=False, lazy="selectin")
 
 
@@ -48,6 +54,7 @@ class OrderItem(Base):
     While line_total = quantity * unit_price_snapshot, caching it prevents complex aggregations
     and rounding discrepancies across different reporting layers.
     """
+
     __tablename__ = "order_items"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)

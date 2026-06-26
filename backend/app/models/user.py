@@ -27,6 +27,7 @@ class User(Base):
     - cascade="all, delete-orphan": Ensures that if a User is deleted, all their addresses
       and their cart are also wiped from the DB to prevent orphaned records.
     """
+
     __tablename__ = "users"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -43,10 +44,14 @@ class User(Base):
         onupdate=func.now(),
     )
 
-    addresses = relationship("Address", back_populates="user", cascade="all, delete-orphan", lazy="selectin")
+    addresses = relationship(
+        "Address", back_populates="user", cascade="all, delete-orphan", lazy="selectin"
+    )
     orders = relationship("Order", back_populates="user", lazy="selectin")
     reviews = relationship("Review", back_populates="user", lazy="selectin")
-    cart = relationship("Cart", back_populates="user", uselist=False, cascade="all, delete-orphan", lazy="selectin")
+    cart = relationship(
+        "Cart", back_populates="user", uselist=False, cascade="all, delete-orphan", lazy="selectin"
+    )
 
 
 class Address(Base):

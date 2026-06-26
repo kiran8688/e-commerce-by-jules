@@ -29,6 +29,7 @@ import app.models.auth
 
 target_metadata = Base.metadata
 
+
 def run_migrations_offline() -> None:
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
@@ -48,6 +49,7 @@ def do_run_migrations(connection):
     with context.begin_transaction():
         context.run_migrations()
 
+
 async def run_migrations_online() -> None:
     connectable = create_async_engine(
         config.get_main_option("sqlalchemy.url"),
@@ -58,6 +60,7 @@ async def run_migrations_online() -> None:
         await connection.run_sync(do_run_migrations)
 
     await connectable.dispose()
+
 
 if context.is_offline_mode():
     run_migrations_offline()

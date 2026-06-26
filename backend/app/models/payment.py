@@ -13,7 +13,9 @@ class Payment(Base):
     __tablename__ = "payments"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    order_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("orders.id"), unique=True, nullable=False)
+    order_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("orders.id"), unique=True, nullable=False
+    )
     provider: Mapped[str] = mapped_column(String(50), nullable=False)
     provider_reference: Mapped[str | None] = mapped_column(String(255), nullable=True)
     amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)

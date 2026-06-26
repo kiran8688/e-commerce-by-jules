@@ -23,16 +23,20 @@ import app.models.review
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 async def create_tables() -> None:
     async with engine.begin() as conn:
         logger.info("Creating all tables...")
         await conn.run_sync(Base.metadata.create_all)
 
+
 async def init_db() -> None:
     async with AsyncSessionLocal() as session:
         # Create Admin User
         admin_email = "admin@example.com"
-        result = await session.execute(select(app.models.user.User).where(app.models.user.User.email == admin_email))
+        result = await session.execute(
+            select(app.models.user.User).where(app.models.user.User.email == admin_email)
+        )
         user = result.scalars().first()
         if not user:
             logger.info("Creating admin user...")
@@ -56,19 +60,23 @@ async def init_db() -> None:
             {"name": "Apparel", "slug": "apparel", "desc": "Clothing and accessories."},
             {"name": "Home & Garden", "slug": "home-garden", "desc": "Items for your home."},
             {"name": "Sports", "slug": "sports", "desc": "Sporting goods and equipment."},
-            {"name": "Books", "slug": "books", "desc": "Literature and non-fiction."}
+            {"name": "Books", "slug": "books", "desc": "Literature and non-fiction."},
         ]
 
         category_objs = []
         for cat_data in categories_data:
-            result = await session.execute(select(app.models.catalog.Category).where(app.models.catalog.Category.slug == cat_data["slug"]))
+            result = await session.execute(
+                select(app.models.catalog.Category).where(
+                    app.models.catalog.Category.slug == cat_data["slug"]
+                )
+            )
             cat = result.scalars().first()
             if not cat:
                 cat = app.models.catalog.Category(
                     id=uuid.uuid4(),
                     name=cat_data["name"],
                     slug=cat_data["slug"],
-                    description=cat_data["desc"]
+                    description=cat_data["desc"],
                 )
                 session.add(cat)
                 category_objs.append(cat)
@@ -90,13 +98,31 @@ async def init_db() -> None:
 
         if not existing_product:
             logger.info("Generating dummy products...")
-            adjectives = ["Premium", "Essential", "Luxury", "Smart", "Eco-Friendly", "Pro", "Ultra", "Classic", "Modern", "Vintage"]
+            adjectives = [
+                "Premium",
+                "Essential",
+                "Luxury",
+                "Smart",
+                "Eco-Friendly",
+                "Pro",
+                "Ultra",
+                "Classic",
+                "Modern",
+                "Vintage",
+            ]
             nouns = {
                 "Electronics": ["Smartphone", "Laptop", "Headphones", "Speaker", "Watch", "Tablet"],
                 "Apparel": ["T-Shirt", "Jacket", "Sneakers", "Jeans", "Hoodie", "Hat"],
                 "Home & Garden": ["Planter", "Lamp", "Chair", "Desk", "Rug", "Vase"],
-                "Sports": ["Yoga Mat", "Dumbbells", "Water Bottle", "Running Shoes", "Tent", "Backpack"],
-                "Books": ["Novel", "Guide", "Cookbook", "Journal", "Biography", "Atlas"]
+                "Sports": [
+                    "Yoga Mat",
+                    "Dumbbells",
+                    "Water Bottle",
+                    "Running Shoes",
+                    "Tent",
+                    "Backpack",
+                ],
+                "Books": ["Novel", "Guide", "Cookbook", "Journal", "Biography", "Atlas"],
             }
 
             for i in range(1, 51):  # Generate 50 products
@@ -119,7 +145,7 @@ async def init_db() -> None:
                     price=price,
                     compare_at_price=round(price * 1.2, 2) if random.random() > 0.7 else None,
                     is_active=True,
-                    is_featured=random.random() > 0.8
+                    is_featured=random.random() > 0.8,
                 )
                 session.add(product)
 
@@ -128,7 +154,7 @@ async def init_db() -> None:
                     id=uuid.uuid4(),
                     product_id=product.id,
                     quantity_on_hand=random.randint(10, 500),
-                    reorder_level=10
+                    reorder_level=10,
                 )
                 session.add(inventory)
 
@@ -138,14 +164,14 @@ async def init_db() -> None:
                     product_id=product.id,
                     image_url=f"https://picsum.photos/seed/{product.id}/600/800",
                     alt_text=f"Image of {name}",
-                    is_primary=True
+                    is_primary=True,
                 )
                 session.add(image)
 
             await session.commit()
             logger.info("Created 50 dummy products with inventory and images.")
         else:
-             logger.info("Products already exist in the database.")
+            logger.info("Products already exist in the database.")
 
 
 async def main() -> None:
@@ -153,6 +179,7 @@ async def main() -> None:
     await create_tables()
     await init_db()
     logger.info("Database initialization finished.")
+
 
 if __name__ == "__main__":
     asyncio.run(main())

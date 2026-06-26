@@ -39,6 +39,7 @@ class Product(Base):
     - `uselist=False` on `inventory` defines a one-to-one relationship.
     - `lazy="selectin"` is used for async compatibility.
     """
+
     __tablename__ = "products"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -59,8 +60,16 @@ class Product(Base):
     )
 
     category = relationship("Category", back_populates="products", lazy="selectin")
-    images = relationship("ProductImage", back_populates="product", cascade="all, delete-orphan", lazy="selectin")
-    inventory = relationship("Inventory", back_populates="product", uselist=False, cascade="all, delete-orphan", lazy="selectin")
+    images = relationship(
+        "ProductImage", back_populates="product", cascade="all, delete-orphan", lazy="selectin"
+    )
+    inventory = relationship(
+        "Inventory",
+        back_populates="product",
+        uselist=False,
+        cascade="all, delete-orphan",
+        lazy="selectin",
+    )
     reviews = relationship("Review", back_populates="product", lazy="selectin")
 
 
@@ -82,10 +91,14 @@ class Inventory(Base):
     __tablename__ = "inventory"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    product_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("products.id"), unique=True, nullable=False)
+    product_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("products.id"), unique=True, nullable=False
+    )
     quantity_on_hand: Mapped[int] = mapped_column(default=0, nullable=False)
     reserved_quantity: Mapped[int] = mapped_column(default=0, nullable=False)
     reorder_level: Mapped[int] = mapped_column(default=0, nullable=False)
-    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
 
     product = relationship("Product", back_populates="inventory", lazy="selectin")

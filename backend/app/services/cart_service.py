@@ -6,6 +6,7 @@ from app.models.cart import Cart, CartItem
 from app.models.catalog import Product
 from app.schemas.cart import CartItemCreate
 
+
 async def get_or_create_cart(db: AsyncSession, user_id: UUID) -> Cart:
     cart = await db.scalar(select(Cart).where(Cart.user_id == user_id))
     if not cart:
@@ -14,6 +15,7 @@ async def get_or_create_cart(db: AsyncSession, user_id: UUID) -> Cart:
         await db.commit()
         await db.refresh(cart)
     return cart
+
 
 async def add_to_cart(db: AsyncSession, user_id: UUID, item: CartItemCreate) -> Cart:
     cart = await get_or_create_cart(db, user_id)
@@ -32,7 +34,7 @@ async def add_to_cart(db: AsyncSession, user_id: UUID, item: CartItemCreate) -> 
             cart_id=cart.id,
             product_id=product.id,
             quantity=item.quantity,
-            unit_price_snapshot=product.price
+            unit_price_snapshot=product.price,
         )
         db.add(cart_item)
 

@@ -39,4 +39,6 @@ async def authenticate_user(db: AsyncSession, email: str, password: str) -> User
 
 def issue_token_for_user(user: User) -> str:
     """Return JWT access token for a user."""
-    return create_access_token(subject=str(user.id), extra={"email": user.email, "admin": user.is_admin})
+    return create_access_token(
+        subject=str(user.id), extra={"email": user.email, "admin": user.is_admin}
+    )
