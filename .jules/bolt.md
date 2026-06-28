@@ -1,0 +1,3 @@
+## 2026-06-28 - Preventing Wasted Eager Queries with noload('*')
+**Learning:** When models configure relationships with `lazy="selectin"` for async compatibility, SQLAlchemy will eagerly execute separate queries for each relationship. If the Pydantic response schema (like `ProductOut`) omits these fields, these eager queries are completely wasted and cause unnecessary database load. `raiseload('*')` only prevents lazy loading, so we must use `noload('*')` to override mapper-level eager loading.
+**Action:** Always inspect the Pydantic response schema and append `.options(noload('*'))` to the SQLAlchemy query when related fields are not needed.
