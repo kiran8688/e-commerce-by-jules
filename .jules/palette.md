@@ -1,0 +1,3 @@
+## 2026-06-28 - Focus States for Interactive Elements
+**Learning:** Adding explicit, branded focus-visible classes (`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm`) improves keyboard accessibility without relying on default browser styles, integrating seamlessly with the design system.
+**Action:** Always include branded focus-visible utilities on buttons and links for enhanced accessibility and visual consistency across the application.
