@@ -1,0 +1,4 @@
+## 2026-06-30 - Fix IDOR in user-specific endpoints
+**Vulnerability:** Insecure Direct Object Reference (IDOR) on `/carts/{user_id}` and `/orders/{user_id}` endpoints. The endpoints relied solely on the unpredictability of UUIDs without asserting that the authenticated user actually owns the resource.
+**Learning:** UUIDs should not be used as the sole mechanism for access control. Even if hard to guess, they can be leaked or exposed, leading to unauthorized access.
+**Prevention:** Always implement explicit authorization checks (e.g., verifying `user_id == current_user.id` or checking for admin privileges) on endpoints that access user-specific resources, regardless of the primary key type.
