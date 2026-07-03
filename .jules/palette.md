@@ -1,0 +1,3 @@
+## 2026-07-03 - Added focus-within for hidden overlay interactive elements
+**Learning:** Overlay containers that reveal interactive elements (like Quick Add buttons) on hover using `group-hover:opacity-100` must also include `focus-within:opacity-100`. Otherwise, keyboard users navigating via Tab cannot see the elements they focus on.
+**Action:** Always pair `group-hover:opacity-100` with `focus-within:opacity-100` on parent overlay containers, and use explicit `focus-visible` utilities (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4]`) on the interactive elements inside.
