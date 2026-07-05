@@ -1,0 +1,4 @@
+## 2026-07-05 - Fix IDOR in Carts and Orders Endpoints
+**Vulnerability:** Insecure Direct Object Reference (IDOR). The `/carts/{user_id}` and `/orders/{user_id}` endpoints allowed any authenticated user to access or modify resources belonging to other users simply by changing the `user_id` in the URL path.
+**Learning:** Endpoints mapped directly to UUIDs are not inherently secure even if UUIDs are unpredictable. Without explicit authorization checks ensuring the resource owner matches the authenticated token, unauthorized horizontal access is possible.
+**Prevention:** Always pair `user_id` route parameters with an authorization check `current_user: User = Depends(get_current_user)` and explicitly assert ownership: `user_id == current_user.id` or check for admin privileges before proceeding with the operation.
