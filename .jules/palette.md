@@ -1,0 +1,3 @@
+## 2026-07-05 - Focus-within for Hover-Revealed Elements
+**Learning:** When using `group-hover:opacity-100` to reveal interactive elements (like the "Quick Add" button in ProductCard) on desktop, these elements remain invisible to keyboard users who tab through the interface.
+**Action:** Always pair `group-hover:opacity-100` with `focus-within:opacity-100` on the container to ensure the hidden elements become visible when any of their children receive focus via keyboard navigation.
