@@ -1,0 +1,3 @@
+## 2026-07-06 - Prevent Wasted Eager DB Queries on Pydantic Models
+**Learning:** Returning Pydantic response schemas (like `ProductOut`) that omit relationship fields configured with `lazy='selectin'` causes unnecessary eager DB queries to be fired because SQLAlchemy does not know about the schema structure. `raiseload('*')` only prevents lazy loading, so we must use `noload('*')` on the underlying query.
+**Action:** When creating list endpoints for schemas without relationships, create specific service methods tailored to the schema (e.g., `get_products_for_catalog_list`) and pass `noload('*')` to the query to avoid eager loading wasted relationships. Do not apply `noload` to generic service methods as it will break other features.
