@@ -1,0 +1,11 @@
+--- frontend/src/components/ui/ProductCard.jsx
++++ frontend/src/components/ui/ProductCard.jsx
+@@ -14,7 +14,7 @@
+           loading="lazy"
+         />
+         {/* Quick Add Overlay on Desktop */}
+-        <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 hidden lg:block bg-gradient-to-t from-black/60 to-transparent">
++        <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-within:opacity-100 hidden lg:block bg-gradient-to-t from-black/60 to-transparent">
+           <button
+             onClick={onAddToCart}
+             className="w-full rounded-[0.375rem] bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] px-4 py-3 text-sm font-medium text-[#f1f2ff] shadow-sm hover:from-[#0046bb] hover:to-[#658eff] transition-all flex items-center justify-center gap-2"
