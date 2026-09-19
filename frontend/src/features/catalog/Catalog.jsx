@@ -66,14 +66,17 @@ export function Catalog() {
             Discover our new arrivals featuring premium materials and
             uncompromising design language.
           </p>
-          <button className="bg-[#ffffff] text-[#0050d4] font-medium text-base px-8 py-3.5 rounded-lg hover:bg-[#eef1f3] transition-colors shadow-[0_12px_40px_rgba(0,0,0,0.15)]">
+          <button
+            className="bg-[#ffffff] text-[#0050d4] font-medium text-base px-8 py-3.5 rounded-lg hover:bg-[#eef1f3] transition-colors shadow-[0_12px_40px_rgba(0,0,0,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0050d4]"
+            onClick={() => document.getElementById('featured-pieces')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Explore Collection
           </button>
         </div>
       </section>
 
       {/* Product Grid Section */}
-      <section>
+      <section id="featured-pieces">
         <div className="flex items-end justify-between mb-8">
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[#2c2f31] font-['Manrope',sans-serif]">
             Featured Pieces
