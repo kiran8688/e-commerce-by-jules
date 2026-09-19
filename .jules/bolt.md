@@ -1,3 +1,3 @@
-## 2026-07-08 - Avoid N+1 queries by disabling relationships lazy loading
-**Learning:** When Pydantic response schemas omit relationship fields (e.g., `ProductOut` omitting `category`, `inventory`), eager loading relationships defined with `lazy="selectin"` on the SQLAlchemy model leads to significant performance issues due to unused queries.
-**Action:** Apply `noload('*')` via specific service methods or explicit flags like `load_relationships=False` to prevent wasted queries. Do not change `lazy="selectin"` on models directly.
+## 2026-09-19 - Unnecessary Eager Loading in Cart Operations
+**Learning:** The SQLAlchemy models rely heavily on `lazy="selectin"` for async compatibility, which forces N+1 secondary DB queries on every standard read. Models like `Cart` load their parent `User`, and `Product` loads `images`, `reviews`, and `inventory` by default, even during simple operations like adding an item to the cart where only IDs and prices are needed.
+**Action:** Always selectively disable eager loading using `.options(noload('*'))` or target specific relations with `noload(Model.relation)` in service functions when secondary data is unnecessary for the immediate schema response or logic, significantly reducing DB hits.
