@@ -27,7 +27,7 @@ export function Cart() {
         </p>
         <Link
           to="/products"
-          className="inline-flex items-center justify-center gap-2 rounded-[0.375rem] bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] px-8 py-3.5 text-base font-medium text-[#f1f2ff] shadow-sm hover:from-[#0046bb] hover:to-[#658eff] transition-all"
+          className="inline-flex items-center justify-center gap-2 rounded-[0.375rem] bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] px-8 py-3.5 text-base font-medium text-[#f1f2ff] shadow-sm hover:from-[#0046bb] hover:to-[#658eff] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2"
         >
           Explore Collection
           <ArrowRight className="w-5 h-5" />
