@@ -1,6 +1,8 @@
 import { ShoppingCart } from "lucide-react";
+import React from "react";
 
-export function ProductCard({ name, price, imageUrl, onAddToCart }) {
+// ⚡ Bolt: Memoize ProductCard to prevent unnecessary re-renders when parent components (like Catalog) update state
+export const ProductCard = React.memo(function ProductCard({ name, price, imageUrl, onAddToCart }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-[0.75rem] bg-[#ffffff] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(44,47,49,0.06)] hover:-translate-y-1 h-full">
       {/* Image Container with 4:5 Aspect Ratio for Editorial Feel */}
@@ -44,4 +46,4 @@ export function ProductCard({ name, price, imageUrl, onAddToCart }) {
       </div>
     </div>
   );
-}
+});

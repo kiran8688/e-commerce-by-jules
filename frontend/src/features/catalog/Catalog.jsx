@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { fetchProducts } from "../../api/products.js";
 import { ProductCard } from "../../components/ui/ProductCard.jsx";
 
@@ -37,6 +37,9 @@ function CatalogSkeleton() {
 export function Catalog() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // ⚡ Bolt: Memoize the add to cart handler to maintain a stable reference, ensuring the React.memo() on ProductCard works effectively.
+  const handleAddToCart = useCallback(() => {}, []);
 
   useEffect(() => {
     fetchProducts()
@@ -96,7 +99,7 @@ export function Catalog() {
                 name={p.name}
                 price={`$${p.price.toFixed(2)}`}
                 imageUrl="/placeholder.svg"
-                onAddToCart={() => {}}
+                onAddToCart={handleAddToCart}
               />
             ))}
           </div>
