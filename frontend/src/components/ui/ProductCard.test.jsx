@@ -24,8 +24,8 @@ describe('ProductCard', () => {
   it('calls onAddToCart when the button is clicked', () => {
     render(<ProductCard {...mockProduct} />);
 
-    const button = screen.getByRole('button', { name: /add to cart/i });
-    fireEvent.click(button);
+    const buttons = screen.getAllByRole('button', { name: new RegExp(`add ${mockProduct.name} to cart`, 'i') });
+    fireEvent.click(buttons[0]);
 
     expect(mockProduct.onAddToCart).toHaveBeenCalledTimes(1);
   });
