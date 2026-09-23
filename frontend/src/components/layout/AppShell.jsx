@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { ShoppingCart, User, Menu, X, Search } from "lucide-react";
 import { useState } from "react";
 
@@ -28,18 +28,18 @@ export function AppShell({ children }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8 text-[0.875rem] font-medium">
-            <Link
+            <NavLink
               to="/"
-              className="text-[#595c5e] hover:text-[#0050d4] transition-colors"
+              className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
             >
               Home
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/products"
-              className="text-[#595c5e] hover:text-[#0050d4] transition-colors"
+              className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
             >
               Products
-            </Link>
+            </NavLink>
           </nav>
 
           {/* Desktop Actions */}
@@ -51,24 +51,24 @@ export function AppShell({ children }) {
             >
               <Search className="w-5 h-5" />
             </button>
-            <Link
+            <NavLink
               to="/account"
               aria-label="Account"
               title="Account"
-              className="text-[#595c5e] hover:text-[#0050d4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm"
+              className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
             >
               <User className="w-5 h-5" />
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/cart"
               aria-label="Cart"
               title="Cart"
-              className="relative text-[#595c5e] hover:text-[#0050d4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm"
+              className={({ isActive }) => `relative transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
             >
               <ShoppingCart className="w-5 h-5" />
               {/* Optional Cart Badge */}
               {/* <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#0050d4] text-[10px] font-bold text-white">2</span> */}
-            </Link>
+            </NavLink>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -91,36 +91,36 @@ export function AppShell({ children }) {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-[#eef1f3] shadow-lg">
             <nav className="flex flex-col px-6 py-4 gap-4 text-base font-medium">
-              <Link
+              <NavLink
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[#2c2f31] hover:text-[#0050d4]"
+                className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Home
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[#2c2f31] hover:text-[#0050d4]"
+                className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Products
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/cart"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[#2c2f31] hover:text-[#0050d4] flex items-center justify-between"
+                className={({ isActive }) => `flex items-center justify-between transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Cart
                 <ShoppingCart className="w-5 h-5" />
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/account"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-[#2c2f31] hover:text-[#0050d4] flex items-center justify-between"
+                className={({ isActive }) => `flex items-center justify-between transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Account
                 <User className="w-5 h-5" />
-              </Link>
+              </NavLink>
             </nav>
           </div>
         )}
