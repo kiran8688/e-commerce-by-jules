@@ -9,3 +9,7 @@
 ## 2026-09-20 - Add skip-to-content link for better keyboard navigation
 **Learning:** Single page applications without skip links force keyboard users to navigate through all header links on every page transition.
 **Action:** Always provide a visually hidden skip-to-content link at the top of the AppShell that bypasses navigation.
+## 2026-09-23 - Add navigation active states
+
+**Learning:** Users need a clear visual indicator to understand which page they are currently on. `react-router-dom`'s `NavLink` provides a clean way to implement this while automatically adding the `aria-current="page"` attribute for screen readers, improving both visual feedback and accessibility simultaneously.
+**Action:** Whenever building navigation menus, prefer `NavLink` over `Link` to easily manage active states and ensure proper accessibility attributes are applied.
