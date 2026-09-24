@@ -7,3 +7,6 @@
 ## 2026-09-21 - [Preventing Unnecessary ProductCard Re-renders]
 **Learning:** In a product listing grid, child components like ProductCard frequently re-render unnecessarily when the parent (Catalog) updates its state (e.g., when the product list is fetched or pagination changes). Even with simple props, new function references (like inline `onAddToCart={() => {}}`) trigger re-renders.
 **Action:** Always wrap heavy list item components in `React.memo` AND ensure all callback props passed to them from the parent are memoized using `useCallback` to maintain stable references.
+## 2026-09-24 - Prevent N+1 queries when creating Order from Cart
+**Learning:** Creating an order queried `Cart` which eagerly loads `CartItem`, which then eagerly loaded `Product` and its relationships (`Category`, `ProductImage`, `Review`, `Inventory`). Only the base properties of `Product` are needed to snapshot data into `OrderItem`.
+**Action:** Used `noload` and `defaultload` on the specific properties when fetching the cart in `create_order_from_cart` to bypass those loads, drastically reducing the number of SQL statements when converting carts to orders.
