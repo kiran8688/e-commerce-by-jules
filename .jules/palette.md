@@ -13,3 +13,6 @@
 
 **Learning:** Users need a clear visual indicator to understand which page they are currently on. `react-router-dom`'s `NavLink` provides a clean way to implement this while automatically adding the `aria-current="page"` attribute for screen readers, improving both visual feedback and accessibility simultaneously.
 **Action:** Whenever building navigation menus, prefer `NavLink` over `Link` to easily manage active states and ensure proper accessibility attributes are applied.
+## 2026-09-24 - Provide password visibility toggle for authentication
+**Learning:** Found that the password input was lacking a visibility toggle. This small micro-UX improvement significantly improves usability and accessibility, reducing cognitive load on users trying to ensure they typed complex passwords correctly, especially on mobile.
+**Action:** Always include a show/hide password toggle on all standard password inputs, equipped with clear `aria-label` attributes for screen readers.
