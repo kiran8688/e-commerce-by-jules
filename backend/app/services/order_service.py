@@ -32,7 +32,23 @@ async def create_order_from_cart(db: AsyncSession, user_id: UUID, order_in: Orde
     - Concurrency: If two requests hit this simultaneously, `db.commit()` handles transaction
       integrity, though a distributed lock on `user_id` could be added for strict idempotency.
     """
-    cart = await db.scalar(select(Cart).where(Cart.user_id == user_id))
+    # ⚡ Bolt: Prevent unnecessary eager loading of Cart's User and Product's heavy relationships (images, reviews, inventory)
+    from sqlalchemy.orm import noload, defaultload
+    from app.models.catalog import Product
+
+    cart = await db.scalar(
+        select(Cart)
+        .where(Cart.user_id == user_id)
+        .options(
+            noload(Cart.user),
+            defaultload(Cart.items).defaultload(CartItem.product).options(
+                noload(Product.images),
+                noload(Product.reviews),
+                noload(Product.inventory),
+                noload(Product.category)
+            )
+        )
+    )
     if not cart or not cart.items:
         raise ValueError("Cart is empty")
 
