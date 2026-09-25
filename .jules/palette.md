@@ -16,3 +16,7 @@
 ## 2026-09-24 - Provide password visibility toggle for authentication
 **Learning:** Found that the password input was lacking a visibility toggle. This small micro-UX improvement significantly improves usability and accessibility, reducing cognitive load on users trying to ensure they typed complex passwords correctly, especially on mobile.
 **Action:** Always include a show/hide password toggle on all standard password inputs, equipped with clear `aria-label` attributes for screen readers.
+
+## 2026-09-25 - Provide helpful guidance in empty states
+**Learning:** Generic bare-text empty states leave users at a dead end and feel unpolished, reducing the perceived quality of the interface.
+**Action:** Always replace bare text empty states with stylized containers featuring an illustrative icon, a clear heading, and helpful body text to improve user guidance and maintain engagement.

@@ -1,13 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
 import { fetchProducts } from "../../api/products.js";
 import { ProductCard } from "../../components/ui/ProductCard.jsx";
+import { PackageOpen } from "lucide-react";
 
 /**
  * Skeleton Loader Component
  */
 function CatalogSkeleton() {
   return (
-    <div className="animate-pulse">
+    <div className="animate-pulse" role="status" aria-label="Loading catalog">
+      <span className="sr-only">Loading products, please wait...</span>
       {/* Hero Skeleton */}
       <div className="mb-12 md:mb-16 rounded-2xl bg-[#eef1f3] h-[300px] md:h-[400px] w-full" />
 
@@ -88,8 +90,16 @@ export function Catalog() {
         </div>
 
         {products.length === 0 ? (
-          <div className="py-20 text-center text-[#595c5e] bg-[#ffffff] rounded-xl border border-[#eef1f3]">
-            <p className="text-lg">No products currently available.</p>
+          <div className="flex flex-col items-center justify-center py-16 md:py-24 px-6 text-center bg-[#ffffff] rounded-[1.25rem] shadow-[0_12px_40px_rgba(44,47,49,0.03)] border border-[#eef1f3]/50">
+            <div className="w-20 h-20 bg-[#eef1f3] rounded-full flex items-center justify-center mb-6">
+              <PackageOpen className="w-10 h-10 text-[#abadaf]" strokeWidth={1.5} aria-hidden="true" />
+            </div>
+            <h3 className="text-2xl font-bold text-[#2c2f31] mb-3 font-['Manrope',sans-serif]">
+              New collection arriving soon.
+            </h3>
+            <p className="text-[#595c5e] max-w-md leading-relaxed font-['Inter',sans-serif]">
+              We're currently curating our latest arrivals. Please check back shortly to explore the new seasonal pieces.
+            </p>
           </div>
         ) : (
           <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
