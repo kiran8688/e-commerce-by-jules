@@ -10,3 +10,6 @@
 ## 2026-09-24 - Prevent N+1 queries when creating Order from Cart
 **Learning:** Creating an order queried `Cart` which eagerly loads `CartItem`, which then eagerly loaded `Product` and its relationships (`Category`, `ProductImage`, `Review`, `Inventory`). Only the base properties of `Product` are needed to snapshot data into `OrderItem`.
 **Action:** Used `noload` and `defaultload` on the specific properties when fetching the cart in `create_order_from_cart` to bypass those loads, drastically reducing the number of SQL statements when converting carts to orders.
+## 2026-09-26 - Optimized get_current_user Eager Loading
+**Learning:** The User model has relationships with `lazy="selectin"`. Because `get_current_user` is a FastAPI dependency used on almost every authenticated endpoint, `db.get(User, ...)` was implicitly and eagerly loading the user's entire history (addresses, orders, reviews, cart) on *every single request*.
+**Action:** Use `options=[noload('*')]` with `db.get` in authentication dependencies to prevent loading expensive relationships when we only need the user's base fields (like ID and role).
