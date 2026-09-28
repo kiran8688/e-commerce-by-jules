@@ -20,3 +20,7 @@
 ## 2026-09-25 - Provide helpful guidance in empty states
 **Learning:** Generic bare-text empty states leave users at a dead end and feel unpolished, reducing the perceived quality of the interface.
 **Action:** Always replace bare text empty states with stylized containers featuring an illustrative icon, a clear heading, and helpful body text to improve user guidance and maintain engagement.
+
+## 2026-09-28 - Add loading states to asynchronous form submissions
+**Learning:** Forms that lack explicit loading states on their submission buttons leave users uncertain if their action registered, often leading to duplicate clicks, errors, and a degraded perception of reliability.
+**Action:** Always pair asynchronous form submissions with a clear visual loading indicator (e.g., a spinner and updated text like "Submitting...") and apply a disabled state to the button to prevent multiple submissions.

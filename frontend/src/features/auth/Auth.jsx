@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
-export function Auth() {
+export function Auth({ isLoading = false, onSubmit }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="max-w-md mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-6">Login</h1>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={onSubmit}>
         <div>
           <label htmlFor="email" className="block text-sm font-medium">Email <span className="text-red-500" aria-hidden="true">*</span></label>
           <input id="email" name="email" type="email" required autoComplete="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" />
@@ -33,8 +33,19 @@ export function Auth() {
             </button>
           </div>
         </div>
-        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-colors">
-          Sign In
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <>
+              <Loader2 className="animate-spin -ml-1 mr-2 h-4 w-4" aria-hidden="true" />
+              Signing in...
+            </>
+          ) : (
+            "Sign In"
+          )}
         </button>
       </form>
     </div>
