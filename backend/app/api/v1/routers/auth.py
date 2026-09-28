@@ -22,7 +22,8 @@ async def register(payload: UserCreate, db: AsyncSession = Depends(get_db)):
     - 409 Conflict: Email already in use.
     - 422 Unprocessable Entity: Pydantic validation failed (e.g., weak password, invalid email format).
     """
-    existing = await get_user_by_email(db, payload.email)
+    # ⚡ Bolt: Prevent eager loading of User relationships during existence check
+    existing = await get_user_by_email(db, payload.email, load_relationships=False)
     if existing:
         raise HTTPException(status_code=409, detail="User already exists")
 

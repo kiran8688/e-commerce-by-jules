@@ -13,3 +13,6 @@
 ## 2026-09-26 - Optimized get_current_user Eager Loading
 **Learning:** The User model has relationships with `lazy="selectin"`. Because `get_current_user` is a FastAPI dependency used on almost every authenticated endpoint, `db.get(User, ...)` was implicitly and eagerly loading the user's entire history (addresses, orders, reviews, cart) on *every single request*.
 **Action:** Use `options=[noload('*')]` with `db.get` in authentication dependencies to prevent loading expensive relationships when we only need the user's base fields (like ID and role).
+## 2026-09-28 - Eager Loading on Authentication
+**Learning:** Querying the `User` model implicitly executes 4 extra queries for relationships (addresses, orders, reviews, cart) due to `lazy="selectin"`. This causes massive N+1 issues when simply checking if a user exists or verifying credentials.
+**Action:** Always use `noload('*')` when fetching a User in authentication flows (like `get_user_by_email` during login or registration) where relationships are not accessed.
