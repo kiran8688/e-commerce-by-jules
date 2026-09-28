@@ -23,15 +23,19 @@ async def create_user(db: AsyncSession, payload: UserCreate) -> User:
     return user
 
 
-async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
+async def get_user_by_email(db: AsyncSession, email: str, load_relationships: bool = True) -> User | None:
     """Retrieve a user by their email address."""
     stmt = select(User).where(User.email == email)
+    if not load_relationships:
+        from sqlalchemy.orm import noload
+        # ⚡ Bolt: Prevent unnecessary eager loading of User relationships (addresses, orders, etc.)
+        stmt = stmt.options(noload('*'))
     return await db.scalar(stmt)
 
 
 async def authenticate_user(db: AsyncSession, email: str, password: str) -> User | None:
     """Verify login credentials."""
-    user = await get_user_by_email(db, email)
+    user = await get_user_by_email(db, email, load_relationships=False)
 
     if not user:
         return None
