@@ -24,3 +24,6 @@
 ## 2026-09-28 - Add loading states to asynchronous form submissions
 **Learning:** Forms that lack explicit loading states on their submission buttons leave users uncertain if their action registered, often leading to duplicate clicks, errors, and a degraded perception of reliability.
 **Action:** Always pair asynchronous form submissions with a clear visual loading indicator (e.g., a spinner and updated text like "Submitting...") and apply a disabled state to the button to prevent multiple submissions.
+## 2026-09-29 - Mobile Menu Keyboard Accessibility
+**Learning:** Native Escape key dismissal and explicitly linking toggle buttons to dropdown menus via aria-controls are crucial for mobile menu accessibility.
+**Action:** Always implement Escape key listeners for modal/dropdown closures and use aria-controls to programmatically associate trigger elements with the content they control.

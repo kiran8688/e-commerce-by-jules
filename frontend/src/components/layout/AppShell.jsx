@@ -1,9 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import { ShoppingCart, User, Menu, X, Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function AppShell({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
 
   return (
     <div className="min-h-screen bg-[#f5f7f9] text-[#2c2f31] font-['Inter',sans-serif]">
@@ -78,6 +88,7 @@ export function AppShell({ children }) {
             aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
             title={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
             aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation-menu"
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -89,7 +100,7 @@ export function AppShell({ children }) {
 
         {/* Mobile Navigation Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-[#eef1f3] shadow-lg">
+          <div id="mobile-navigation-menu" className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-[#eef1f3] shadow-lg">
             <nav className="flex flex-col px-6 py-4 gap-4 text-base font-medium">
               <NavLink
                 to="/"
