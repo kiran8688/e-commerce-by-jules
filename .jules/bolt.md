@@ -16,3 +16,6 @@
 ## 2026-09-28 - Eager Loading on Authentication
 **Learning:** Querying the `User` model implicitly executes 4 extra queries for relationships (addresses, orders, reviews, cart) due to `lazy="selectin"`. This causes massive N+1 issues when simply checking if a user exists or verifying credentials.
 **Action:** Always use `noload('*')` when fetching a User in authentication flows (like `get_user_by_email` during login or registration) where relationships are not accessed.
+## 2026-09-30 - Cache Expensive API Calls
+**Learning:** Simple in-memory caching of frequently accessed, rarely changing data like product catalogs can significantly improve perceived performance and reduce unnecessary network requests during client-side navigation.
+**Action:** Implement simple module-level caching for list API calls where real-time data is not strictly required.
