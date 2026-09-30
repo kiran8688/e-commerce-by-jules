@@ -27,3 +27,6 @@
 ## 2026-09-29 - Mobile Menu Keyboard Accessibility
 **Learning:** Native Escape key dismissal and explicitly linking toggle buttons to dropdown menus via aria-controls are crucial for mobile menu accessibility.
 **Action:** Always implement Escape key listeners for modal/dropdown closures and use aria-controls to programmatically associate trigger elements with the content they control.
+## 2026-09-30 - Pair group-hover animations with group-focus-within
+**Learning:** Complex components that use `group-hover` for decorative visual effects (like scaling images or highlighting text) often exclude keyboard users from the same delightful experience.
+**Action:** Consistently pair `group-hover:` utility classes with `group-focus-within:` to ensure interactive components provide the same level of polish and visual feedback for both mouse and keyboard navigation.
