@@ -27,3 +27,6 @@
 ## 2026-09-29 - Mobile Menu Keyboard Accessibility
 **Learning:** Native Escape key dismissal and explicitly linking toggle buttons to dropdown menus via aria-controls are crucial for mobile menu accessibility.
 **Action:** Always implement Escape key listeners for modal/dropdown closures and use aria-controls to programmatically associate trigger elements with the content they control.
+## 2026-10-01 - Consistent Directional Micro-Interactions on CTAs
+**Learning:** Found that applying consistent directional arrows (ArrowRight for navigation, ArrowDown for scroll) with transform hover effects (`group-hover:translate-x-1`, `group-hover:translate-y-1`) establishes a clear, predictable interaction pattern for primary CTAs throughout the application.
+**Action:** Always pair navigational CTAs with a directional icon and apply a `transition-transform` group hover effect to reinforce the action's outcome, while ensuring the icon is hidden from screen readers (`aria-hidden="true"`).
