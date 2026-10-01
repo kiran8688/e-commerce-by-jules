@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { fetchProducts } from "../../api/products.js";
 import { ProductCard } from "../../components/ui/ProductCard.jsx";
-import { PackageOpen } from "lucide-react";
+import { PackageOpen, ArrowDown } from "lucide-react";
 
 /**
  * Skeleton Loader Component
@@ -72,10 +72,11 @@ export function Catalog() {
             uncompromising design language.
           </p>
           <button
-            className="bg-[#ffffff] text-[#0050d4] font-medium text-base px-8 py-3.5 rounded-lg hover:bg-[#eef1f3] transition-colors shadow-[0_12px_40px_rgba(0,0,0,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0050d4]"
+            className="group inline-flex items-center justify-center gap-2 bg-[#ffffff] text-[#0050d4] font-medium text-base px-8 py-3.5 rounded-lg hover:bg-[#eef1f3] transition-colors shadow-[0_12px_40px_rgba(0,0,0,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffffff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0050d4]"
             onClick={() => document.getElementById('featured-pieces')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Explore Collection
+            <ArrowDown className="w-5 h-5 transition-transform group-hover:translate-y-1" aria-hidden="true" />
           </button>
         </div>
       </section>

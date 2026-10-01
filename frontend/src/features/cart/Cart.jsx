@@ -16,7 +16,7 @@ export function Cart() {
       {/* Empty State */}
       <div className="flex flex-col items-center justify-center py-16 md:py-24 px-6 text-center bg-[#ffffff] rounded-[1.25rem] shadow-[0_12px_40px_rgba(44,47,49,0.03)] border border-[#eef1f3]/50">
         <div className="w-20 h-20 bg-[#eef1f3] rounded-full flex items-center justify-center mb-6">
-          <ShoppingBag className="w-10 h-10 text-[#abadaf]" strokeWidth={1.5} />
+          <ShoppingBag className="w-10 h-10 text-[#abadaf]" strokeWidth={1.5} aria-hidden="true" />
         </div>
         <h2 className="text-2xl font-bold text-[#2c2f31] mb-3 font-['Manrope',sans-serif]">
           Your cart is waiting.
@@ -27,10 +27,10 @@ export function Cart() {
         </p>
         <Link
           to="/products"
-          className="inline-flex items-center justify-center gap-2 rounded-[0.375rem] bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] px-8 py-3.5 text-base font-medium text-[#f1f2ff] shadow-sm hover:from-[#0046bb] hover:to-[#658eff] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2"
+          className="group inline-flex items-center justify-center gap-2 rounded-[0.375rem] bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] px-8 py-3.5 text-base font-medium text-[#f1f2ff] shadow-sm hover:from-[#0046bb] hover:to-[#658eff] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2"
         >
           Explore Collection
-          <ArrowRight className="w-5 h-5" />
+          <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
         </Link>
       </div>
     </div>
