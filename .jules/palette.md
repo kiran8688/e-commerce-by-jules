@@ -30,3 +30,6 @@
 ## 2026-10-01 - Consistent Directional Micro-Interactions on CTAs
 **Learning:** Found that applying consistent directional arrows (ArrowRight for navigation, ArrowDown for scroll) with transform hover effects (`group-hover:translate-x-1`, `group-hover:translate-y-1`) establishes a clear, predictable interaction pattern for primary CTAs throughout the application.
 **Action:** Always pair navigational CTAs with a directional icon and apply a `transition-transform` group hover effect to reinforce the action's outcome, while ensuring the icon is hidden from screen readers (`aria-hidden="true"`).
+## 2026-10-02 - Missing Focus Visible on Text Links
+**Learning:** The desktop navigation, mobile navigation, and footer text links in `AppShell.jsx` lacked `focus-visible` styles, making keyboard navigation difficult for accessibility.
+**Action:** Ensure all text-based interactive links (`<Link>`, `<NavLink>`, `<a>`) include `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm` (or similar standard focus styling) so keyboard users can clearly see the active element.
