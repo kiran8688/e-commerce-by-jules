@@ -31,7 +31,7 @@ export function AppShell({ children }) {
           {/* Logo */}
           <Link
             to="/"
-            className="text-2xl font-bold tracking-tight text-[#2c2f31] font-['Manrope',sans-serif]"
+            className="text-2xl font-bold tracking-tight text-[#2c2f31] font-['Manrope',sans-serif] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm"
           >
             ShopSphere
           </Link>
@@ -40,13 +40,13 @@ export function AppShell({ children }) {
           <nav className="hidden md:flex gap-8 text-[0.875rem] font-medium">
             <NavLink
               to="/"
-              className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
+              className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
             >
               Home
             </NavLink>
             <NavLink
               to="/products"
-              className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
+              className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
             >
               Products
             </NavLink>
@@ -105,21 +105,21 @@ export function AppShell({ children }) {
               <NavLink
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Home
               </NavLink>
               <NavLink
                 to="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Products
               </NavLink>
               <NavLink
                 to="/cart"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `flex items-center justify-between transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Cart
                 <ShoppingCart className="w-5 h-5" />
@@ -127,7 +127,7 @@ export function AppShell({ children }) {
               <NavLink
                 to="/account"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `flex items-center justify-between transition-colors ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#2c2f31] hover:text-[#0050d4]"}`}
               >
                 Account
                 <User className="w-5 h-5" />
@@ -159,14 +159,14 @@ export function AppShell({ children }) {
               <h3 className="font-semibold text-[#2c2f31] mb-4">Shop</h3>
               <ul className="space-y-3 text-[0.875rem] text-[#595c5e]">
                 <li>
-                  <Link to="/products" className="hover:text-[#0050d4]">
+                  <Link to="/products" className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block">
                     All Products
                   </Link>
                 </li>
                 <li>
                   <Link
                     to="/products?category=new"
-                    className="hover:text-[#0050d4]"
+                    className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block"
                   >
                     New Arrivals
                   </Link>
@@ -174,7 +174,7 @@ export function AppShell({ children }) {
                 <li>
                   <Link
                     to="/products?category=sale"
-                    className="hover:text-[#0050d4]"
+                    className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block"
                   >
                     Sale
                   </Link>
@@ -185,17 +185,17 @@ export function AppShell({ children }) {
               <h3 className="font-semibold text-[#2c2f31] mb-4">Support</h3>
               <ul className="space-y-3 text-[0.875rem] text-[#595c5e]">
                 <li>
-                  <a href="#" className="hover:text-[#0050d4]">
+                  <a href="#" className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-[#0050d4]">
+                  <a href="#" className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block">
                     Shipping & Returns
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-[#0050d4]">
+                  <a href="#" className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block">
                     Contact Us
                   </a>
                 </li>
@@ -205,12 +205,12 @@ export function AppShell({ children }) {
               <h3 className="font-semibold text-[#2c2f31] mb-4">Legal</h3>
               <ul className="space-y-3 text-[0.875rem] text-[#595c5e]">
                 <li>
-                  <a href="#" className="hover:text-[#0050d4]">
+                  <a href="#" className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block">
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-[#0050d4]">
+                  <a href="#" className="hover:text-[#0050d4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm inline-block">
                     Terms of Service
                   </a>
                 </li>
