@@ -33,3 +33,6 @@
 ## 2026-10-02 - Missing Focus Visible on Text Links
 **Learning:** The desktop navigation, mobile navigation, and footer text links in `AppShell.jsx` lacked `focus-visible` styles, making keyboard navigation difficult for accessibility.
 **Action:** Ensure all text-based interactive links (`<Link>`, `<NavLink>`, `<a>`) include `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm` (or similar standard focus styling) so keyboard users can clearly see the active element.
+## 2026-10-03 - Fix WCAG 2.5.3 Label in Name violation on Product Cards
+**Learning:** Overriding visible text inside buttons with `aria-label` (e.g., visible "Quick Add", aria-label "Add to cart") breaks WCAG 2.5.3. Voice dictation users who say "Click Quick Add" will fail because the software only sees the `aria-label`.
+**Action:** Use visually hidden text (`sr-only`) appended to the visible text instead of overwriting with `aria-label` to ensure the accessible name contains the visible text.
