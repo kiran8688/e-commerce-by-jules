@@ -13,7 +13,8 @@ describe('ProductCard', () => {
   it('renders product information correctly', () => {
     render(<ProductCard {...mockProduct} />);
 
-    expect(screen.getByText(mockProduct.name)).toBeInTheDocument();
+    // Since the name is used in the sr-only tags inside the buttons, we should use getAllByText
+    expect(screen.getAllByText(mockProduct.name)[0]).toBeInTheDocument();
     expect(screen.getByText(mockProduct.price)).toBeInTheDocument();
 
     const image = screen.getByRole('img');
@@ -24,7 +25,7 @@ describe('ProductCard', () => {
   it('calls onAddToCart when the button is clicked', () => {
     render(<ProductCard {...mockProduct} />);
 
-    const buttons = screen.getAllByRole('button', { name: new RegExp(`add ${mockProduct.name} to cart`, 'i') });
+    const buttons = screen.getAllByRole('button', { name: new RegExp(`quick add ${mockProduct.name} to cart`, 'i') });
     fireEvent.click(buttons[0]);
 
     expect(mockProduct.onAddToCart).toHaveBeenCalledTimes(1);
