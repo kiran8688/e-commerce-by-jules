@@ -36,3 +36,6 @@
 ## 2026-10-03 - Fix WCAG 2.5.3 Label in Name violation on Product Cards
 **Learning:** Overriding visible text inside buttons with `aria-label` (e.g., visible "Quick Add", aria-label "Add to cart") breaks WCAG 2.5.3. Voice dictation users who say "Click Quick Add" will fail because the software only sees the `aria-label`.
 **Action:** Use visually hidden text (`sr-only`) appended to the visible text instead of overwriting with `aria-label` to ensure the accessible name contains the visible text.
+## 2026-10-04 - Manage Focus on Smooth Scroll Links
+**Learning:** When building "Explore" or "Scroll down" buttons that navigate to different sections of the same page, keyboard users are left behind if focus isn't programmatically moved. Even though the page visually scrolls, their tab position remains at the top.
+**Action:** Always add `tabIndex={-1}` and `className="focus:outline-none scroll-mt-6"` to the target container, and explicitly call `target.focus({ preventScroll: true })` after scrolling to sync the keyboard focus with the visual viewport.
