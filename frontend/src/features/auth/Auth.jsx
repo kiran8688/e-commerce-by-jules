@@ -10,7 +10,15 @@ export function Auth({ isLoading = false, onSubmit }) {
       <form className="space-y-4" onSubmit={onSubmit}>
         <div>
           <label htmlFor="email" className="block text-sm font-medium">Email <span className="text-red-500" aria-hidden="true">*</span></label>
-          <input id="email" name="email" type="email" required autoComplete="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            disabled={isLoading}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
+          />
         </div>
         <div>
           <label htmlFor="password" className="block text-sm font-medium">Password <span className="text-red-500" aria-hidden="true">*</span></label>
@@ -21,13 +29,15 @@ export function Auth({ isLoading = false, onSubmit }) {
               type={showPassword ? "text" : "password"}
               required
               autoComplete="current-password"
-              className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-10 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow"
+              disabled={isLoading}
+              className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-10 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? "Hide password" : "Show password"}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-md"
+              disabled={isLoading}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500"
             >
               {showPassword ? <EyeOff className="h-5 w-5" aria-hidden="true" /> : <Eye className="h-5 w-5" aria-hidden="true" />}
             </button>
