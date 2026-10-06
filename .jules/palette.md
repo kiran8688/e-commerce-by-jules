@@ -42,3 +42,6 @@
 ## 2026-10-05 - Add Disabled States to Auth Form Interactions
 **Learning:** Forforms simulating async processes (`isLoading`), failing to disable text inputs and toggle buttons alongside the submit button creates a confusing experience and risks unexpected form state mutations.
 **Action:** Always comprehensively disable interactive form elements (inputs, toggles, selects) using `disabled={isLoading}` along with appropriate `disabled:` visual styles to ensure user interaction is completely paused during submission.
+## 2026-10-06 - Improve accessibility for dynamic content
+**Learning:** Users relying on screen readers need immediate feedback when interactive elements like password visibility toggles change state. Without it, the interface can feel unresponsive or confusing.
+**Action:** Always include an `aria-live` region to announce dynamic state changes (e.g., "Password is now visible") and use `aria-pressed` on toggle buttons to explicitly convey the current state to assistive technologies.

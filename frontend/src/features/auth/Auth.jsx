@@ -8,6 +8,9 @@ export function Auth({ isLoading = false, onSubmit }) {
     <div className="max-w-md mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-6">Login</h1>
       <form className="space-y-4" onSubmit={onSubmit}>
+        <div aria-live="polite" className="sr-only">
+          {showPassword ? "Password is now visible" : "Password is now hidden"}
+        </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium">Email <span className="text-red-500" aria-hidden="true">*</span></label>
           <input
@@ -35,6 +38,7 @@ export function Auth({ isLoading = false, onSubmit }) {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
+              aria-pressed={showPassword}
               aria-label={showPassword ? "Hide password" : "Show password"}
               disabled={isLoading}
               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500"
