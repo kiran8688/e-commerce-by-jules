@@ -45,3 +45,6 @@
 ## 2026-10-06 - Improve accessibility for dynamic content
 **Learning:** Users relying on screen readers need immediate feedback when interactive elements like password visibility toggles change state. Without it, the interface can feel unresponsive or confusing.
 **Action:** Always include an `aria-live` region to announce dynamic state changes (e.g., "Password is now visible") and use `aria-pressed` on toggle buttons to explicitly convey the current state to assistive technologies.
+## 2026-10-07 - Do not rely solely on color for active navigation states
+**Learning:** Relying solely on color changes (e.g., changing text from gray to blue) to indicate the active navigation state violates WCAG 1.4.1 (Use of Color), making it difficult for users with visual impairments to discern the active page.
+**Action:** Always provide an additional structural or visual indicator for active navigation states, such as an underline (`underline decoration-2`), font weight change (`font-semibold`), or a distinct background color (`bg-[#eef1f3]`).
