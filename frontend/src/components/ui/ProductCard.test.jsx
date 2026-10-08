@@ -22,13 +22,14 @@ describe('ProductCard', () => {
     expect(image).toHaveAttribute('alt', mockProduct.name);
   });
 
-  it('calls onAddToCart when the button is clicked', () => {
+  it('calls onAddToCart when the button is clicked and shows Added! state', () => {
     render(<ProductCard {...mockProduct} />);
 
     const buttons = screen.getAllByRole('button', { name: new RegExp(`quick add ${mockProduct.name} to cart`, 'i') });
     fireEvent.click(buttons[0]);
 
     expect(mockProduct.onAddToCart).toHaveBeenCalledTimes(1);
+    expect(screen.getAllByText('Added!')[0]).toBeInTheDocument();
   });
 
   it('displays the correct button text', () => {

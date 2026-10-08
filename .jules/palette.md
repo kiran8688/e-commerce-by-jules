@@ -48,3 +48,7 @@
 ## 2026-10-07 - Do not rely solely on color for active navigation states
 **Learning:** Relying solely on color changes (e.g., changing text from gray to blue) to indicate the active navigation state violates WCAG 1.4.1 (Use of Color), making it difficult for users with visual impairments to discern the active page.
 **Action:** Always provide an additional structural or visual indicator for active navigation states, such as an underline (`underline decoration-2`), font weight change (`font-semibold`), or a distinct background color (`bg-[#eef1f3]`).
+
+## 2026-10-08 - Provide visual feedback for list-level actions
+**Learning:** Actions taken on items within a list or grid (like "Add to Cart" on a product card) often lack feedback, leaving the user uncertain if their action succeeded without navigating to a separate view (like the cart page).
+**Action:** Always provide inline, transient visual feedback for list-level actions (e.g., briefly changing the button state to "Added!" with a checkmark) and pair it with an `aria-live` region to inform screen reader users of the success.
