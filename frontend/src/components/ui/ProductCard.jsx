@@ -1,10 +1,29 @@
-import { ShoppingCart } from "lucide-react";
-import React from "react";
+import { ShoppingCart, Check } from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 // ⚡ Bolt: Memoize ProductCard to prevent unnecessary re-renders when parent components (like Catalog) update state
 export const ProductCard = React.memo(function ProductCard({ name, price, imageUrl, onAddToCart }) {
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    let timeout;
+    if (isAdded) {
+      timeout = setTimeout(() => setIsAdded(false), 2000);
+    }
+    return () => clearTimeout(timeout);
+  }, [isAdded]);
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    onAddToCart(e);
+    setIsAdded(true);
+  };
+
   return (
     <div className="group flex flex-col overflow-hidden rounded-[0.75rem] bg-[#ffffff] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(44,47,49,0.06)] hover:-translate-y-1 h-full">
+      <div aria-live="polite" className="sr-only">
+        {isAdded ? `${name} added to cart` : ""}
+      </div>
       {/* Image Container with 4:5 Aspect Ratio for Editorial Feel */}
       <div
         className="relative w-full overflow-hidden bg-[#eef1f3]"
@@ -19,11 +38,20 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
         {/* Quick Add Overlay on Desktop */}
         <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-within:opacity-100 hidden lg:block bg-gradient-to-t from-black/60 to-transparent">
           <button
-            onClick={onAddToCart}
-            className="w-full rounded-[0.375rem] bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] px-4 py-3 text-sm font-medium text-[#f1f2ff] shadow-sm hover:from-[#0046bb] hover:to-[#658eff] focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+            onClick={handleAddToCart}
+            className={`w-full rounded-[0.375rem] px-4 py-3 text-sm font-medium text-[#f1f2ff] shadow-sm focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${
+              isAdded
+                ? "bg-green-600 hover:bg-green-700"
+                : "bg-[#0050d4] bg-gradient-to-r from-[#0050d4] to-[#7b9cff] hover:from-[#0046bb] hover:to-[#658eff]"
+            }`}
           >
-            <ShoppingCart className="w-4 h-4" aria-hidden="true" />
-            Quick Add<span className="sr-only"> {name} to cart</span>
+            {isAdded ? (
+              <Check className="w-4 h-4" aria-hidden="true" />
+            ) : (
+              <ShoppingCart className="w-4 h-4" aria-hidden="true" />
+            )}
+            {isAdded ? "Added!" : "Quick Add"}
+            <span className="sr-only"> {name} to cart</span>
           </button>
         </div>
       </div>
@@ -37,11 +65,20 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
 
         {/* Mobile Add to Cart (Visible on smaller screens, hidden on LG where quick add appears) */}
         <button
-          onClick={onAddToCart}
-          className="mt-4 lg:hidden w-full rounded-[0.375rem] bg-[#eef1f3] px-4 py-2.5 text-sm font-medium text-[#2c2f31] hover:bg-[#dfe3e6] focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+          onClick={handleAddToCart}
+          className={`mt-4 lg:hidden w-full rounded-[0.375rem] px-4 py-2.5 text-sm font-medium focus-visible:ring-2 focus-visible:ring-[#0050d4] focus-visible:ring-offset-2 focus-visible:outline-none active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${
+            isAdded
+              ? "bg-green-600 text-white hover:bg-green-700"
+              : "bg-[#eef1f3] text-[#2c2f31] hover:bg-[#dfe3e6]"
+          }`}
         >
-          <ShoppingCart className="w-4 h-4 text-[#595c5e]" aria-hidden="true" />
-          Add to Cart<span className="sr-only"> {name}</span>
+          {isAdded ? (
+            <Check className="w-4 h-4 text-white" aria-hidden="true" />
+          ) : (
+            <ShoppingCart className="w-4 h-4 text-[#595c5e]" aria-hidden="true" />
+          )}
+          {isAdded ? "Added!" : "Add to Cart"}
+          <span className="sr-only"> {name}</span>
         </button>
       </div>
     </div>
