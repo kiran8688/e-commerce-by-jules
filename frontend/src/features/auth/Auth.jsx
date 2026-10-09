@@ -20,7 +20,8 @@ export function Auth({ isLoading = false, onSubmit }) {
             required
             autoComplete="email"
             disabled={isLoading}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
+            placeholder="you@example.com"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow placeholder:text-gray-400 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
           />
         </div>
         <div>
@@ -33,7 +34,8 @@ export function Auth({ isLoading = false, onSubmit }) {
               required
               autoComplete="current-password"
               disabled={isLoading}
-              className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-10 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
+              placeholder="••••••••"
+              className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-10 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow placeholder:text-gray-400 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
             />
             <button
               type="button"
