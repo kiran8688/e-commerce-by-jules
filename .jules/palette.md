@@ -52,3 +52,6 @@
 ## 2026-10-08 - Provide visual feedback for list-level actions
 **Learning:** Actions taken on items within a list or grid (like "Add to Cart" on a product card) often lack feedback, leaving the user uncertain if their action succeeded without navigating to a separate view (like the cart page).
 **Action:** Always provide inline, transient visual feedback for list-level actions (e.g., briefly changing the button state to "Added!" with a checkmark) and pair it with an `aria-live` region to inform screen reader users of the success.
+## 2026-10-10 - SPA Navigation Accessibility
+**Learning:** Single Page Applications (SPAs) built with raw React Router often fail to announce page changes to screen readers and trap keyboard focus on the navigation link that was just clicked, leading to a confusing accessibility experience.
+**Action:** Always implement a route-change listener that updates the `document.title` and programmatically shifts focus to the `#main-content` container (using `tabIndex={-1}`) to simulate native multi-page navigation behavior.

@@ -1,9 +1,35 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ShoppingCart, User, Menu, X, Search } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function AppShell({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isInitialMount = useRef(true);
+
+  // Handle SPA routing accessibility (Title update & Focus management)
+  useEffect(() => {
+    const titles = {
+      '/': 'ShopSphere - Curated Aesthetics',
+      '/products': 'Products | ShopSphere',
+      '/cart': 'Your Cart | ShopSphere',
+      '/auth': 'Login | ShopSphere',
+      '/account': 'Your Account | ShopSphere',
+    };
+    document.title = titles[location.pathname] || 'ShopSphere';
+
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    const main = document.getElementById('main-content');
+    if (main) {
+      main.focus({ preventScroll: true });
+    }
+
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
