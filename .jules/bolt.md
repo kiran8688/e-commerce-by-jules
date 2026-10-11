@@ -19,3 +19,6 @@
 ## 2026-09-30 - Cache Expensive API Calls
 **Learning:** Simple in-memory caching of frequently accessed, rarely changing data like product catalogs can significantly improve perceived performance and reduce unnecessary network requests during client-side navigation.
 **Action:** Implement simple module-level caching for list API calls where real-time data is not strictly required.
+## 2026-10-11 - Prevent cascading eager loading on Cart items
+**Learning:** In `get_or_create_cart`, querying the `Cart` implicitly loads `Cart.items` (which is needed), but each `CartItem` also explicitly eager loads its `product` relationship. Because `Product` eager loads its own heavy relationships (images, reviews, inventory), returning a cart triggers a massive N+1 query avalanche for data that is never used in the `CartOut` schema.
+**Action:** Use `defaultload(Cart.items).noload(CartItem.product)` in the query options to explicitly halt the eager loading cascade at the item level when product details are unnecessary.
