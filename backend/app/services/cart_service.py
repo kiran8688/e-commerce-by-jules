@@ -1,6 +1,6 @@
 from uuid import UUID
 from sqlalchemy import select
-from sqlalchemy.orm import noload
+from sqlalchemy.orm import noload, defaultload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.cart import Cart, CartItem
@@ -9,7 +9,15 @@ from app.schemas.cart import CartItemCreate
 
 async def get_or_create_cart(db: AsyncSession, user_id: UUID) -> Cart:
     # ⚡ Bolt: Prevent unnecessary eager loading of the User model since it is not returned in CartOut
-    cart = await db.scalar(select(Cart).where(Cart.user_id == user_id).options(noload(Cart.user)))
+    # ⚡ Bolt: Prevent cascading N+1 eager loading of CartItem.product (and its images, reviews, inventory) since CartOut only needs item scalars
+    cart = await db.scalar(
+        select(Cart)
+        .where(Cart.user_id == user_id)
+        .options(
+            noload(Cart.user),
+            defaultload(Cart.items).noload(CartItem.product)
+        )
+    )
     if not cart:
         cart = Cart(user_id=user_id)
         db.add(cart)
