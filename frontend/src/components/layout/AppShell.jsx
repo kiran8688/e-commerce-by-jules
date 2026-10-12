@@ -79,37 +79,37 @@ export function AppShell({ children }) {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-2">
             <button
               aria-label="Search"
               title="Search"
-              className="text-[#595c5e] hover:text-[#0050d4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm"
+              className="p-2 text-[#595c5e] hover:bg-[#eef1f3] hover:text-[#0050d4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-5 h-5" aria-hidden="true" />
             </button>
             <NavLink
               to="/account"
               aria-label="Account"
               title="Account"
-              className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
+              className={({ isActive }) => `p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md ${isActive ? "bg-[#eef1f3] text-[#0050d4]" : "text-[#595c5e] hover:bg-[#eef1f3] hover:text-[#0050d4]"}`}
             >
-              <User className="w-5 h-5" />
+              <User className="w-5 h-5" aria-hidden="true" />
             </NavLink>
             <NavLink
               to="/cart"
               aria-label="Cart"
               title="Cart"
-              className={({ isActive }) => `relative transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm ${isActive ? "text-[#0050d4]" : "text-[#595c5e] hover:text-[#0050d4]"}`}
+              className={({ isActive }) => `relative p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md ${isActive ? "bg-[#eef1f3] text-[#0050d4]" : "text-[#595c5e] hover:bg-[#eef1f3] hover:text-[#0050d4]"}`}
             >
-              <ShoppingCart className="w-5 h-5" />
+              <ShoppingCart className="w-5 h-5" aria-hidden="true" />
               {/* Optional Cart Badge */}
-              {/* <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#0050d4] text-[10px] font-bold text-white">2</span> */}
+              {/* <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-[#0050d4] text-[10px] font-bold text-white">2</span> */}
             </NavLink>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-[#2c2f31] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm"
+            className="md:hidden p-2 text-[#2c2f31] hover:bg-[#eef1f3] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
             title={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
@@ -117,9 +117,9 @@ export function AppShell({ children }) {
             aria-controls="mobile-navigation-menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6" aria-hidden="true" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-6 h-6" aria-hidden="true" />
             )}
           </button>
         </div>
