@@ -55,3 +55,7 @@
 ## 2026-10-10 - SPA Navigation Accessibility
 **Learning:** Single Page Applications (SPAs) built with raw React Router often fail to announce page changes to screen readers and trap keyboard focus on the navigation link that was just clicked, leading to a confusing accessibility experience.
 **Action:** Always implement a route-change listener that updates the `document.title` and programmatically shifts focus to the `#main-content` container (using `tabIndex={-1}`) to simulate native multi-page navigation behavior.
+
+## 2026-10-12 - Improve hit area and active states for header icon buttons
+**Learning:** Icon-only buttons often suffer from small clickable hit areas on touch/mouse, and relying solely on color changes for active states violates WCAG 1.4.1 (Use of Color). Furthermore, internal SVG icons without `aria-hidden="true"` can be redundantly announced by screen readers when wrapped in a button with an `aria-label`.
+**Action:** Always wrap icon buttons with a minimum padding (e.g., `p-2`), provide a subtle hover background color (`hover:bg-[#eef1f3]`), use background color to indicate active states (`bg-[#eef1f3]`), and ensure internal SVGs have `aria-hidden="true"`.
