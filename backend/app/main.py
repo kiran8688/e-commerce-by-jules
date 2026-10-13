@@ -12,11 +12,17 @@ core app logic.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 
 from app.api.v1.routers import admin, auth, carts, orders, products, reviews, users
 from app.core.config import settings
 
 app = FastAPI(title=settings.PROJECT_NAME)
+
+# ⚡ Bolt: Compress HTTP responses for payloads larger than 1000 bytes.
+# This significantly reduces network bandwidth and load times for large JSON
+# arrays, such as the product catalog or order history list.
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # Middleware Configuration
 # Why CORS? The frontend (React Vite) operates on a different origin (e.g., localhost:3000)
