@@ -59,3 +59,6 @@
 ## 2026-10-12 - Improve hit area and active states for header icon buttons
 **Learning:** Icon-only buttons often suffer from small clickable hit areas on touch/mouse, and relying solely on color changes for active states violates WCAG 1.4.1 (Use of Color). Furthermore, internal SVG icons without `aria-hidden="true"` can be redundantly announced by screen readers when wrapped in a button with an `aria-label`.
 **Action:** Always wrap icon buttons with a minimum padding (e.g., `p-2`), provide a subtle hover background color (`hover:bg-[#eef1f3]`), use background color to indicate active states (`bg-[#eef1f3]`), and ensure internal SVGs have `aria-hidden="true"`.
+## 2026-10-13 - Add Caps Lock Warning to Authentication Form
+**Learning:** Users often enter their passwords with Caps Lock mistakenly on, leading to frustrating failed login attempts.
+**Action:** Always include a visual warning (e.g., "Caps Lock is on") associated with password inputs, utilizing `e.getModifierState("CapsLock")` and `aria-describedby` for accessibility.
