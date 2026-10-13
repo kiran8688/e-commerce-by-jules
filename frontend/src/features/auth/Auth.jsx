@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2, AlertTriangle } from "lucide-react";
 
 export function Auth({ isLoading = false, onSubmit }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [capsLock, setCapsLock] = useState(false);
+
+  const checkCapsLock = (e) => {
+    if (e.getModifierState) {
+      setCapsLock(e.getModifierState("CapsLock"));
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10">
@@ -35,6 +42,9 @@ export function Auth({ isLoading = false, onSubmit }) {
               autoComplete="current-password"
               disabled={isLoading}
               placeholder="••••••••"
+              onKeyUp={checkCapsLock}
+              onKeyDown={checkCapsLock}
+              aria-describedby={capsLock ? "caps-lock-warning" : undefined}
               className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-10 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow placeholder:text-gray-400 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
             />
             <button
@@ -48,6 +58,12 @@ export function Auth({ isLoading = false, onSubmit }) {
               {showPassword ? <EyeOff className="h-5 w-5" aria-hidden="true" /> : <Eye className="h-5 w-5" aria-hidden="true" />}
             </button>
           </div>
+          {capsLock && (
+            <p id="caps-lock-warning" role="alert" className="mt-2 text-sm text-amber-600 flex items-center gap-1">
+              <AlertTriangle className="h-4 w-4" aria-hidden="true" />
+              Caps Lock is on
+            </p>
+          )}
         </div>
         <button
           type="submit"
