@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 // ⚡ Bolt: Memoize ProductCard to prevent unnecessary re-renders when parent components (like Catalog) update state
 export const ProductCard = React.memo(function ProductCard({ name, price, imageUrl, onAddToCart }) {
   const [isAdded, setIsAdded] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
     let timeout;
@@ -32,7 +33,11 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
         <img
           src={imageUrl}
           alt={name}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onLoad={() => setIsImageLoaded(true)}
+          onError={() => setIsImageLoaded(true)}
+          className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105 ${
+            isImageLoaded ? "opacity-100" : "opacity-0"
+          }`}
           loading="lazy"
         />
         {/* Quick Add Overlay on Desktop */}
@@ -58,7 +63,10 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
 
       {/* Product Info */}
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-lg font-semibold text-[#2c2f31] font-['Inter',sans-serif] leading-tight mb-1.5 group-hover:text-[#0050d4] transition-colors line-clamp-2">
+        <h3
+          className="text-lg font-semibold text-[#2c2f31] font-['Inter',sans-serif] leading-tight mb-1.5 group-hover:text-[#0050d4] transition-colors line-clamp-2"
+          title={name}
+        >
           {name}
         </h3>
         <p className="text-base font-medium text-[#595c5e] mt-auto">{price}</p>
