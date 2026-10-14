@@ -62,3 +62,6 @@
 ## 2026-10-13 - Add Caps Lock Warning to Authentication Form
 **Learning:** Users often enter their passwords with Caps Lock mistakenly on, leading to frustrating failed login attempts.
 **Action:** Always include a visual warning (e.g., "Caps Lock is on") associated with password inputs, utilizing `e.getModifierState("CapsLock")` and `aria-describedby` for accessibility.
+## 2026-10-14 - Smooth Image Loading Reveals and Tooltips
+**Learning:** Images loading abruptly can cause a jarring pop-in effect that reduces perceived UI quality. Truncated text via `line-clamp` makes it impossible for users to read the full content if it is cut off.
+**Action:** Always wrap images with a state-driven opacity transition (`opacity-0` to `opacity-100` on load) for a smoother reveal, and provide a `title` attribute for truncated text elements so users can hover to read the full text.
