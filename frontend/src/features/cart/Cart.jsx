@@ -1,9 +1,17 @@
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { ShoppingBag, ArrowRight, Home, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Cart() {
   return (
     <div className="w-full max-w-4xl mx-auto">
+      <nav aria-label="Breadcrumb" className="mb-6 flex items-center text-sm font-medium text-[#595c5e]">
+        <Link to="/" className="hover:text-[#0050d4] flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm">
+          <Home className="w-4 h-4" aria-hidden="true" />
+          <span className="sr-only">Home</span>
+        </Link>
+        <ChevronRight className="w-4 h-4 mx-2 text-[#abadaf]" aria-hidden="true" />
+        <span className="text-[#2c2f31]" aria-current="page">Cart</span>
+      </nav>
       <div className="flex items-center justify-between mb-8 md:mb-12 border-b border-[#eef1f3] pb-6">
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#2c2f31] font-['Manrope',sans-serif]">
           Your Curated Cart
