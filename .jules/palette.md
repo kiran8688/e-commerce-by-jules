@@ -65,3 +65,6 @@
 ## 2026-10-14 - Smooth Image Loading Reveals and Tooltips
 **Learning:** Images loading abruptly can cause a jarring pop-in effect that reduces perceived UI quality. Truncated text via `line-clamp` makes it impossible for users to read the full content if it is cut off.
 **Action:** Always wrap images with a state-driven opacity transition (`opacity-0` to `opacity-100` on load) for a smoother reveal, and provide a `title` attribute for truncated text elements so users can hover to read the full text.
+## 2026-10-16 - SPA Scroll Restoration
+**Learning:** Single Page Applications built with React Router don't automatically reset the scroll position to the top on page navigation. This leaves users scrolled halfway down the page when they land on a new route, which feels broken and confusing compared to native multi-page applications.
+**Action:** Always implement a route-change listener that explicitly calls `window.scrollTo({ top: 0, left: 0, behavior: 'instant' })` to restore scroll position predictably on every navigation event.
