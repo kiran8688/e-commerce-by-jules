@@ -23,6 +23,9 @@ export function AppShell({ children }) {
       return;
     }
 
+    // Reset scroll position to top on route change for predictable native-like navigation
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     const main = document.getElementById('main-content');
     if (main) {
       main.focus({ preventScroll: true });
