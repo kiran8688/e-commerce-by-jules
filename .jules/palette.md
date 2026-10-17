@@ -68,3 +68,6 @@
 ## 2026-10-16 - SPA Scroll Restoration
 **Learning:** Single Page Applications built with React Router don't automatically reset the scroll position to the top on page navigation. This leaves users scrolled halfway down the page when they land on a new route, which feels broken and confusing compared to native multi-page applications.
 **Action:** Always implement a route-change listener that explicitly calls `window.scrollTo({ top: 0, left: 0, behavior: 'instant' })` to restore scroll position predictably on every navigation event.
+## 2026-10-17 - Keyboard shortcuts for common actions
+**Learning:** Adding keyboard shortcuts (like '/' for search) significantly improves navigation speed for power users and keyboard-reliant users. Visual cues like `<kbd>` tags help discoverability.
+**Action:** Implement global keydown listeners for primary actions (Search, Cart) and visually indicate the shortcut in the UI and via `aria-keyshortcuts`.
