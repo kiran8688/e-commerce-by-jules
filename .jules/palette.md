@@ -71,3 +71,6 @@
 ## 2026-10-17 - Keyboard shortcuts for common actions
 **Learning:** Adding keyboard shortcuts (like '/' for search) significantly improves navigation speed for power users and keyboard-reliant users. Visual cues like `<kbd>` tags help discoverability.
 **Action:** Implement global keydown listeners for primary actions (Search, Cart) and visually indicate the shortcut in the UI and via `aria-keyshortcuts`.
+## 2026-10-18 - Mobile Menu Click-Outside Dismissal
+**Learning:** Relying solely on a close button or the Escape key for mobile menus leaves out users who naturally try to tap outside the menu to dismiss it. Not having click-outside handling creates a frustrating "trap" UX on touch devices.
+**Action:** Always implement a click-outside handler (`mousedown` and `touchstart`) for custom dropdown menus and modals, ensuring it checks if the click occurred outside both the menu itself and its toggle button.
