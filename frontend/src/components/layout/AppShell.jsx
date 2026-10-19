@@ -76,6 +76,15 @@ export function AppShell({ children }) {
         Skip to main content
       </a>
 
+      {/* Mobile Menu Backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-[#2c2f31]/20 backdrop-blur-sm transition-opacity"
+          aria-hidden="true"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#f5f7f9]/80 backdrop-blur-xl border-b border-[#eef1f3]">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:py-5">
@@ -88,7 +97,7 @@ export function AppShell({ children }) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8 text-[0.875rem] font-medium">
+          <nav aria-label="Desktop" className="hidden md:flex gap-8 text-[0.875rem] font-medium">
             <NavLink
               to="/"
               className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm px-1 py-0.5 ${isActive ? "text-[#0050d4] font-semibold underline underline-offset-[6px] decoration-2" : "text-[#595c5e] hover:text-[#0050d4]"}`}
@@ -156,7 +165,7 @@ export function AppShell({ children }) {
         {/* Mobile Navigation Dropdown */}
         {isMobileMenuOpen && (
           <div id="mobile-navigation-menu" className="md:hidden absolute top-full left-0 w-full bg-[#ffffff] border-b border-[#eef1f3] shadow-lg">
-            <nav className="flex flex-col px-6 py-4 gap-4 text-base font-medium">
+            <nav aria-label="Mobile" className="flex flex-col px-6 py-4 gap-4 text-base font-medium">
               <NavLink
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}

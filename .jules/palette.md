@@ -74,3 +74,6 @@
 ## 2026-10-18 - Mobile Menu Click-Outside Dismissal
 **Learning:** Relying solely on a close button or the Escape key for mobile menus leaves out users who naturally try to tap outside the menu to dismiss it. Not having click-outside handling creates a frustrating "trap" UX on touch devices.
 **Action:** Always implement a click-outside handler (`mousedown` and `touchstart`) for custom dropdown menus and modals, ensuring it checks if the click occurred outside both the menu itself and its toggle button.
+## 2026-10-19 - Mobile Menu Backdrop Stacking
+**Learning:** Adding a full-screen backdrop to a mobile dropdown menu without portal complexity requires precise z-index coordination.
+**Action:** Place the `fixed z-40` backdrop as a sibling immediately preceding the `sticky z-50` header. This ensures the header and its internal dropdown remain accessible and layered above the obscured main content.
