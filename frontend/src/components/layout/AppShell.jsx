@@ -35,6 +35,12 @@ export function AppShell({ children }) {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
@@ -60,6 +66,7 @@ export function AppShell({ children }) {
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleClickOutside);
     return () => {
+      document.body.style.overflow = "";
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
