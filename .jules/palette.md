@@ -77,3 +77,7 @@
 ## 2026-10-19 - Mobile Menu Backdrop Stacking
 **Learning:** Adding a full-screen backdrop to a mobile dropdown menu without portal complexity requires precise z-index coordination.
 **Action:** Place the `fixed z-40` backdrop as a sibling immediately preceding the `sticky z-50` header. This ensures the header and its internal dropdown remain accessible and layered above the obscured main content.
+
+## 2026-10-20 - Prevent scroll bleed on mobile menu
+**Learning:** When a full-screen mobile menu or backdrop is open, allowing the underlying `<body>` to scroll creates a disorienting user experience, often referred to as "scroll bleed". This makes the interface feel unpolished and confusing to navigate, especially on touch devices.
+**Action:** Always apply `overflow: hidden` to the `document.body` when a full-screen modal or mobile menu backdrop is active to prevent background scrolling, and ensure it is cleaned up on unmount or closure.
