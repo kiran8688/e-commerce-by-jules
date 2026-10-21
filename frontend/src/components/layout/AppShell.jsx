@@ -44,6 +44,8 @@ export function AppShell({ children }) {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
+        const toggleBtn = document.querySelector('[aria-controls="mobile-navigation-menu"]');
+        if (toggleBtn) toggleBtn.focus();
       }
 
       // Global shortcut for Search
