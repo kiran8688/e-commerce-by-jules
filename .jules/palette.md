@@ -81,3 +81,7 @@
 ## 2026-10-20 - Prevent scroll bleed on mobile menu
 **Learning:** When a full-screen mobile menu or backdrop is open, allowing the underlying `<body>` to scroll creates a disorienting user experience, often referred to as "scroll bleed". This makes the interface feel unpolished and confusing to navigate, especially on touch devices.
 **Action:** Always apply `overflow: hidden` to the `document.body` when a full-screen modal or mobile menu backdrop is active to prevent background scrolling, and ensure it is cleaned up on unmount or closure.
+
+## 2026-10-21 - Restore Focus After Mobile Menu Closure
+**Learning:** When users dismiss a mobile dropdown menu using the Escape key, simply closing the menu causes focus to be lost (resetting to the `body`). This forces keyboard and screen reader users to navigate from the top of the page again.
+**Action:** Always restore focus programmatically to the toggle button (e.g., using `document.querySelector('[aria-controls="menu-id"]').focus()`) immediately after a user dismisses its associated menu or modal via the Escape key.
