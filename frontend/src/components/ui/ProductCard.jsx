@@ -21,7 +21,7 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
   };
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-[0.75rem] bg-[#ffffff] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(44,47,49,0.06)] hover:-translate-y-1 h-full">
+    <div className="group flex flex-col overflow-hidden rounded-[0.75rem] bg-[#ffffff] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(44,47,49,0.06)] hover:-translate-y-1 focus-within:shadow-[0_12px_40px_rgba(44,47,49,0.06)] focus-within:-translate-y-1 h-full">
       <div aria-live="polite" className="sr-only">
         {isAdded ? `${name} added to cart` : ""}
       </div>
@@ -35,7 +35,7 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
           alt={name}
           onLoad={() => setIsImageLoaded(true)}
           onError={() => setIsImageLoaded(true)}
-          className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105 ${
+          className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105 group-focus-within:scale-105 ${
             isImageLoaded ? "opacity-100" : "opacity-0"
           }`}
           loading="lazy"
@@ -64,7 +64,7 @@ export const ProductCard = React.memo(function ProductCard({ name, price, imageU
       {/* Product Info */}
       <div className="flex flex-1 flex-col p-5">
         <h3
-          className="text-lg font-semibold text-[#2c2f31] font-['Inter',sans-serif] leading-tight mb-1.5 group-hover:text-[#0050d4] transition-colors line-clamp-2"
+          className="text-lg font-semibold text-[#2c2f31] font-['Inter',sans-serif] leading-tight mb-1.5 group-hover:text-[#0050d4] group-focus-within:text-[#0050d4] transition-colors line-clamp-2"
           title={name}
         >
           {name}

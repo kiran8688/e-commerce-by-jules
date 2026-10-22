@@ -85,3 +85,6 @@
 ## 2026-10-21 - Restore Focus After Mobile Menu Closure
 **Learning:** When users dismiss a mobile dropdown menu using the Escape key, simply closing the menu causes focus to be lost (resetting to the `body`). This forces keyboard and screen reader users to navigate from the top of the page again.
 **Action:** Always restore focus programmatically to the toggle button (e.g., using `document.querySelector('[aria-controls="menu-id"]').focus()`) immediately after a user dismisses its associated menu or modal via the Escape key.
+## 2026-10-22 - Align Keyboard Focus Visuals with Pointer Hover States on Cards
+**Learning:** Complex components like Product Cards often have rich pointer hover effects (elevation, image scaling, text color changes) but neglect to duplicate these for keyboard users who tab into internal actions (like a "Quick Add" button). This creates an inequitable experience where keyboard users miss out on intended visual feedback and hierarchy.
+**Action:** Always duplicate `hover:` and `group-hover:` utility classes into their corresponding `focus-within:` and `group-focus-within:` variants on the container and internal elements to ensure the card visually responds identically whether interacted with via mouse or keyboard.
