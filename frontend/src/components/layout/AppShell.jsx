@@ -130,7 +130,7 @@ export function AppShell({ children }) {
               className="group flex items-center gap-1.5 p-2 text-[#595c5e] hover:bg-[#eef1f3] hover:text-[#0050d4] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md"
             >
               <Search className="w-5 h-5" aria-hidden="true" />
-              <kbd className="hidden lg:inline-flex items-center justify-center px-1.5 py-0.5 rounded-[4px] border border-[#dfe3e6] text-[11px] font-sans font-medium text-[#595c5e] bg-[#f5f7f9] group-hover:border-[#0050d4]/30 group-hover:text-[#0050d4] group-hover:bg-[#ffffff] transition-colors" aria-hidden="true">
+              <kbd className="hidden lg:inline-flex items-center justify-center px-1.5 py-0.5 rounded-[4px] border border-[#dfe3e6] text-[11px] font-sans font-medium text-[#595c5e] bg-[#f5f7f9] group-hover:border-[#0050d4]/30 group-hover:text-[#0050d4] group-hover:bg-[#ffffff] group-focus-visible:border-[#0050d4]/30 group-focus-visible:text-[#0050d4] group-focus-visible:bg-[#ffffff] transition-colors" aria-hidden="true">
                 /
               </kbd>
             </button>

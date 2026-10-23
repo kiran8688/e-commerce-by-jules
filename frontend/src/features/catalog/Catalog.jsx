@@ -82,7 +82,7 @@ export function Catalog() {
             }}
           >
             Explore Collection
-            <ArrowDown className="w-5 h-5 transition-transform group-hover:translate-y-1" aria-hidden="true" />
+            <ArrowDown className="w-5 h-5 transition-transform group-hover:translate-y-1 group-focus-visible:translate-y-1" aria-hidden="true" />
           </button>
         </div>
       </section>
