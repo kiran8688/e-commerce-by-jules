@@ -13,7 +13,7 @@ class Order(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     order_number: Mapped[str] = mapped_column(String(40), unique=True, nullable=False)
-    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id"), index=True, nullable=False)
     shipping_address_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("addresses.id"), nullable=False)
     billing_address_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("addresses.id"), nullable=True)
     status: Mapped[str] = mapped_column(String(30), nullable=False)
@@ -51,7 +51,7 @@ class OrderItem(Base):
     __tablename__ = "order_items"
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    order_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("orders.id"), nullable=False)
+    order_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("orders.id"), index=True, nullable=False)
     product_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("products.id"), nullable=False)
     product_name_snapshot: Mapped[str] = mapped_column(String(255), nullable=False)
     sku_snapshot: Mapped[str] = mapped_column(String(80), nullable=False)
