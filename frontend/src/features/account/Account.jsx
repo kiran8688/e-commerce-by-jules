@@ -4,13 +4,21 @@ import { Link } from "react-router-dom";
 export function Account() {
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <nav aria-label="Breadcrumb" className="mb-6 flex items-center text-sm font-medium text-[#595c5e]">
-        <Link to="/" className="hover:text-[#0050d4] flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm">
-          <Home className="w-4 h-4" aria-hidden="true" />
-          <span className="sr-only">Home</span>
-        </Link>
-        <ChevronRight className="w-4 h-4 mx-2 text-[#abadaf]" aria-hidden="true" />
-        <span className="text-[#2c2f31]" aria-current="page">Account</span>
+      <nav aria-label="Breadcrumb" className="mb-6">
+        <ol className="flex items-center text-sm font-medium text-[#595c5e]">
+          <li>
+            <Link to="/" className="hover:text-[#0050d4] flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-sm">
+              <Home className="w-4 h-4" aria-hidden="true" />
+              <span className="sr-only">Home</span>
+            </Link>
+          </li>
+          <li aria-hidden="true">
+            <ChevronRight className="w-4 h-4 mx-2 text-[#abadaf]" />
+          </li>
+          <li>
+            <span className="text-[#2c2f31]" aria-current="page">Account</span>
+          </li>
+        </ol>
       </nav>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#2c2f31] font-['Manrope',sans-serif] mb-8 border-b border-[#eef1f3] pb-6">
         Your Account

@@ -88,3 +88,6 @@
 ## 2026-10-22 - Align Keyboard Focus Visuals with Pointer Hover States on Cards
 **Learning:** Complex components like Product Cards often have rich pointer hover effects (elevation, image scaling, text color changes) but neglect to duplicate these for keyboard users who tab into internal actions (like a "Quick Add" button). This creates an inequitable experience where keyboard users miss out on intended visual feedback and hierarchy.
 **Action:** Always duplicate `hover:` and `group-hover:` utility classes into their corresponding `focus-within:` and `group-focus-within:` variants on the container and internal elements to ensure the card visually responds identically whether interacted with via mouse or keyboard.
+## 2026-10-24 - Provide Accessible Names for Suspense Fallbacks
+**Learning:** When using React's `Suspense` for code-splitting, the fallback UI (like a spinner) is often completely silent to screen readers, leaving users wondering if the app froze while the lazy chunk loads.
+**Action:** Always add `role="status"` and a visually hidden `sr-only` span with context (e.g., "Loading page...") to Suspense fallbacks so assistive technologies announce the loading state predictably.
