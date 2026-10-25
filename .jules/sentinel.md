@@ -11,3 +11,7 @@
 **Vulnerability:** The application lacks validation for `quantity` in `CartItemBase`. Currently, users can submit negative quantities when adding an item to their cart, allowing them to exploit it and deduct from their order total.
 **Learning:** Never trust client-provided input even for straightforward numeric properties. Missing basic boundary checks can lead to serious logic flaws.
 **Prevention:** Always define explicit input validations on Pydantic models using `Field(gt=0, ...)` where applicable.
+## 2026-10-25 - Prevent Password Hash DoS
+**Vulnerability:** The login endpoint lacked length validation for passwords, enabling a Denial of Service (DoS) attack where a user submits a massive password string that consumes excessive CPU resources during password hash verification.
+**Learning:** Hashing algorithms like Argon2 are designed to be CPU-intensive, but unbounded inputs can be exploited to tie up server resources.
+**Prevention:** Enforce strict maximum length constraints (e.g., `Field(max_length=128)`) on all password inputs on the login schema to prevent asymmetric resource exhaustion.
