@@ -91,3 +91,6 @@
 ## 2026-10-24 - Provide Accessible Names for Suspense Fallbacks
 **Learning:** When using React's `Suspense` for code-splitting, the fallback UI (like a spinner) is often completely silent to screen readers, leaving users wondering if the app froze while the lazy chunk loads.
 **Action:** Always add `role="status"` and a visually hidden `sr-only` span with context (e.g., "Loading page...") to Suspense fallbacks so assistive technologies announce the loading state predictably.
+## 2026-10-26 - Add keyboard shortcut hints for discoverability
+**Learning:** Keyboard shortcuts greatly improve accessibility and power user experience, but they are often completely invisible. We found that without visual `<kbd>` tags and `aria-keyshortcuts`, users (and screen readers) remain unaware of these shortcuts (like 'C' for Cart).
+**Action:** Whenever implementing a global keyboard shortcut, always add a visual `<kbd>` hint styled similarly to the search shortcut, include `aria-keyshortcuts`, and append the shortcut to the element's `title` attribute for discoverability.
