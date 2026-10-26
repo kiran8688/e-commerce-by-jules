@@ -54,6 +54,13 @@ export function AppShell({ children }) {
         const searchBtn = document.querySelector('[aria-label^="Search"]');
         if (searchBtn) searchBtn.focus();
       }
+
+      // Global shortcut for Cart
+      if (e.key.toLowerCase() === 'c' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+        e.preventDefault();
+        const cartLink = document.querySelector('[aria-label^="Cart"]');
+        if (cartLink) cartLink.click();
+      }
     };
 
     const handleClickOutside = (e) => {
@@ -145,10 +152,14 @@ export function AppShell({ children }) {
             <NavLink
               to="/cart"
               aria-label="Cart"
-              title="Cart"
-              className={({ isActive }) => `relative p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md ${isActive ? "bg-[#eef1f3] text-[#0050d4]" : "text-[#595c5e] hover:bg-[#eef1f3] hover:text-[#0050d4]"}`}
+              title="Cart (Press c to open)"
+              aria-keyshortcuts="c"
+              className={({ isActive }) => `group relative flex items-center gap-1.5 p-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md ${isActive ? "bg-[#eef1f3] text-[#0050d4]" : "text-[#595c5e] hover:bg-[#eef1f3] hover:text-[#0050d4]"}`}
             >
               <ShoppingCart className="w-5 h-5" aria-hidden="true" />
+              <kbd className="hidden lg:inline-flex items-center justify-center px-1.5 py-0.5 rounded-[4px] border border-[#dfe3e6] text-[11px] font-sans font-medium text-[#595c5e] bg-[#f5f7f9] group-hover:border-[#0050d4]/30 group-hover:text-[#0050d4] group-hover:bg-[#ffffff] group-focus-visible:border-[#0050d4]/30 group-focus-visible:text-[#0050d4] group-focus-visible:bg-[#ffffff] transition-colors" aria-hidden="true">
+                C
+              </kbd>
               {/* Optional Cart Badge */}
               {/* <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-[#0050d4] text-[10px] font-bold text-white">2</span> */}
             </NavLink>
