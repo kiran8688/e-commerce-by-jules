@@ -94,3 +94,6 @@
 ## 2026-10-26 - Add keyboard shortcut hints for discoverability
 **Learning:** Keyboard shortcuts greatly improve accessibility and power user experience, but they are often completely invisible. We found that without visual `<kbd>` tags and `aria-keyshortcuts`, users (and screen readers) remain unaware of these shortcuts (like 'C' for Cart).
 **Action:** Whenever implementing a global keyboard shortcut, always add a visual `<kbd>` hint styled similarly to the search shortcut, include `aria-keyshortcuts`, and append the shortcut to the element's `title` attribute for discoverability.
+## 2026-10-27 - Prevent background focus when mobile menu is open
+**Learning:** When a full-screen mobile menu is open, simply hiding the scrollbar (`overflow: hidden`) is not enough. Screen readers and keyboard users can still navigate into the background `#main-content` and `<footer>` elements, causing them to get lost behind the backdrop.
+**Action:** Always apply the native `inert` attribute to background landmark elements (`<main>`, `<footer>`) when a modal or full-screen mobile menu is active to completely remove them from the accessibility tree and trap focus intuitively.
