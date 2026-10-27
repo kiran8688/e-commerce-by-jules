@@ -222,12 +222,12 @@ export function AppShell({ children }) {
       </header>
 
       {/* Main Content Area */}
-      <main id="main-content" tabIndex={-1} className="mx-auto max-w-7xl px-6 py-8 md:py-12 lg:py-16 focus:outline-none">
+      <main id="main-content" inert={isMobileMenuOpen ? "" : undefined} tabIndex={-1} className="mx-auto max-w-7xl px-6 py-8 md:py-12 lg:py-16 focus:outline-none">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto bg-[#ffffff]">
+      <footer inert={isMobileMenuOpen ? "" : undefined} className="mt-auto bg-[#ffffff]">
         <div className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-1">
