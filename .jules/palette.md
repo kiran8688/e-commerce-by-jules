@@ -97,3 +97,6 @@
 ## 2026-10-27 - Prevent background focus when mobile menu is open
 **Learning:** When a full-screen mobile menu is open, simply hiding the scrollbar (`overflow: hidden`) is not enough. Screen readers and keyboard users can still navigate into the background `#main-content` and `<footer>` elements, causing them to get lost behind the backdrop.
 **Action:** Always apply the native `inert` attribute to background landmark elements (`<main>`, `<footer>`) when a modal or full-screen mobile menu is active to completely remove them from the accessibility tree and trap focus intuitively.
+## 2026-10-29 - Accessible Absolute Positioned Toggle Buttons
+**Learning:** When absolutely positioning icon-only toggle buttons inside inputs (like "show password"), relying solely on zero-inset layout (`inset-y-0`) and text color changes for hover states is insufficient for WCAG 1.4.1 compliance and creates a poor hit area.
+**Action:** Instead, inset the button slightly (`inset-y-1 right-1`), apply padding (`px-2`), add a background hover transition (`hover:bg-gray-100`), and adjust the parent input's padding to match, creating a clearly bounded, accessible interactive area.
