@@ -45,7 +45,7 @@ export function Auth({ isLoading = false, onSubmit }) {
               onKeyUp={checkCapsLock}
               onKeyDown={checkCapsLock}
               aria-describedby={capsLock ? "caps-lock-warning" : undefined}
-              className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-10 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow placeholder:text-gray-400 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
+              className="block w-full rounded-md border-gray-300 shadow-sm border p-2 pr-12 focus:ring-2 focus:ring-slate-900 focus:border-slate-900 focus:outline-none transition-shadow placeholder:text-gray-400 disabled:bg-gray-50 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none"
             />
             <button
               type="button"
@@ -53,7 +53,8 @@ export function Auth({ isLoading = false, onSubmit }) {
               aria-pressed={showPassword}
               aria-label={showPassword ? "Hide password" : "Show password"}
               disabled={isLoading}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500"
+              title={isLoading ? "Cannot toggle password visibility while loading" : ""}
+              className="absolute inset-y-1 right-1 px-2 flex items-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500 disabled:hover:bg-transparent"
             >
               {showPassword ? <EyeOff className="h-5 w-5" aria-hidden="true" /> : <Eye className="h-5 w-5" aria-hidden="true" />}
             </button>
