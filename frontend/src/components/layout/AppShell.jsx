@@ -189,21 +189,21 @@ export function AppShell({ children }) {
               <NavLink
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold underline underline-offset-[6px] decoration-2" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
               >
                 Home
               </NavLink>
               <NavLink
                 to="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold underline underline-offset-[6px] decoration-2" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
               >
                 Products
               </NavLink>
               <NavLink
                 to="/cart"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold underline underline-offset-[6px] decoration-2" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
               >
                 Cart
                 <ShoppingCart className="w-5 h-5" aria-hidden="true" />
@@ -211,7 +211,7 @@ export function AppShell({ children }) {
               <NavLink
                 to="/account"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={({ isActive }) => `flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
+                className={({ isActive }) => `flex items-center justify-between transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0050d4] rounded-md px-3 py-2 ${isActive ? "bg-[#eef1f3] text-[#0050d4] font-semibold underline underline-offset-[6px] decoration-2" : "text-[#2c2f31] hover:bg-[#f5f7f9] hover:text-[#0050d4]"}`}
               >
                 Account
                 <User className="w-5 h-5" aria-hidden="true" />
