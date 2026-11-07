@@ -100,3 +100,6 @@
 ## 2026-10-29 - Accessible Absolute Positioned Toggle Buttons
 **Learning:** When absolutely positioning icon-only toggle buttons inside inputs (like "show password"), relying solely on zero-inset layout (`inset-y-0`) and text color changes for hover states is insufficient for WCAG 1.4.1 compliance and creates a poor hit area.
 **Action:** Instead, inset the button slightly (`inset-y-1 right-1`), apply padding (`px-2`), add a background hover transition (`hover:bg-gray-100`), and adjust the parent input's padding to match, creating a clearly bounded, accessible interactive area.
+## 2026-11-07 - Breadcrumb Structural Counting and Visual Separators
+**Learning:** Adding visual separators (like a chevron icon) as distinct list items (`<li>`) within a breadcrumb navigation `ol` artificially inflates the announced list item count for screen reader users, causing confusion about the true number of navigation steps.
+**Action:** Always merge visual separators into the preceding list item (or use CSS) rather than creating separate `<li>` elements, ensuring they have `aria-hidden="true"` to prevent structural misrepresentation.
